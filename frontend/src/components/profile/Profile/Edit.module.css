@@ -1,0 +1,181 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(173, 171, 168, 0.11);
+  padding: 10px;
+  gap: 1rem;
+}
+
+.topDiv {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.5rem;
+}
+
+.topDiv > header {
+  color: #000;
+  font-size: 30px;
+}
+
+.icon {
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.bodyDiv {
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  /* margin: 1.5rem; */
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.infoDiv {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.infoDiv > header {
+  color: #635f5fa6;
+  font-size: 20px;
+  width: 180px;
+}
+
+.inputDiv {
+  display: grid;
+  grid-template-columns: 450px 450px;
+  gap: 2rem;
+  align-items: center;
+}
+
+.duoDiv {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: #fff;
+  padding: 10px;
+  width: 80%;
+  border-radius: 4px;
+}
+
+.input {
+  padding: 2px 5px;
+
+  width: 100%;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: #000;
+  font-size: 18px;
+}
+
+.btn {
+  display: flex;
+  width: 10%;
+  justify-content: center;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  background-color: #ee1f04de;
+  color: #fff;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+  margin-top: 1rem;
+}
+
+.skillDiv {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 450px 450px;
+  gap: 2rem;
+}
+@media only screen and (max-width: 1250px) and (min-width: 910px) {
+  .topDiv > header {
+    font-size: 22px;
+  }
+  .container {
+    width: 100%;
+  }
+  .infoDiv {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .inputDiv {
+    display: grid;
+    gap: 2.5rem;
+    grid-template-columns: 360px 360px;
+  }
+
+  .duoDiv {
+    /* width: 100%; */
+  }
+  .input {
+    font-size: 16px;
+  }
+  .btn {
+    font-size: 15px;
+  }
+}
+
+@media only screen and (max-width: 910px) and (min-width: 645px) {
+  .topDiv > header {
+    font-size: 22px;
+  }
+  .container {
+    width: 100%;
+  }
+  .infoDiv {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .inputDiv {
+    /* gap: 1rem; */
+    grid-template-columns: 250px 250px;
+  }
+
+  .duoDiv {
+    width: 100%;
+  }
+  .input {
+    font-size: 15px;
+  }
+  .btn {
+    font-size: 15px;
+  }
+}
+
+@media only screen and (max-width: 645px) and (min-width: 145px) {
+  .topDiv > header {
+    font-size: 22px;
+  }
+  .container {
+    width: 100%;
+  }
+
+  .duoDiv {
+    width: 100%;
+  }
+  .infoDiv {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .input {
+    font-size: 13px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .inputDiv {
+    display: flex;
+    flex-direction: column;
+  }
+}

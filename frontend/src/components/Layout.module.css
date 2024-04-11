@@ -1,0 +1,29 @@
+.auth {
+  display: flex;
+  justify-content: center;
+  padding: 25px 25px;
+  background-color: rgba(240, 248, 255, 0.418);
+  width: 80%;
+  border-radius: 25px;
+  margin: auto;
+  z-index: 54;
+}
+
+.icon {
+  position: absolute;
+  font-size: 30px;
+  cursor: pointer;
+  right: 8rem;
+  /* top: 4rem; */
+}
+
+@media only screen and (max-width: 920px) and (min-width: 150px) {
+  .icon {
+    right: 5rem;
+  }
+}
+
+/* mobile */
+
+@media only screen and (max-width: 600px) and (min-width: 220px) {
+}

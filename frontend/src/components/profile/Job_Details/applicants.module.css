@@ -1,0 +1,72 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.topDiv {
+  display: flex;
+  justify-content: flex-end;
+}
+.startDiv {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem;
+}
+.icon {
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.bodyDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.profile {
+  height: 40px;
+}
+
+.infoDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-left: -2rem;
+}
+
+.infoDiv > article:nth-child(1) {
+  font-size: 22px;
+}
+
+.infoDiv > article:nth-child(2) {
+  font-size: 18px;
+  color: rgb(100, 93, 93);
+}
+
+.cvDiv > article {
+  display: flex;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btnDiv {
+  display: grid;
+  grid-template-columns: 100px 100px;
+  gap: 0.8rem;
+}
+.btn {
+  display: flex;
+  /* width: 30%; */
+  justify-content: center;
+  padding: 10px 20px;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: #ee1f04de;
+  color: #fff;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+  /* margin-top: 1rem; */
+}

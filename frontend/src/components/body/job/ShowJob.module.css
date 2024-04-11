@@ -1,0 +1,93 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 2rem;
+}
+
+.topDiv {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  cursor: pointer;
+  margin-top: -1rem;
+  position: relative;
+}
+
+.icon {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.topDiv > span {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.leftDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 90%;
+  margin: auto;
+}
+
+.resultDiv {
+  display: flex;
+  width: 100%;
+  padding: 25px 25px;
+  background-color: #fff;
+  justify-content: space-between;
+  border-radius: 10px;
+}
+
+.leftResult {
+  display: flex;
+  flex-direction: column;
+}
+
+.leftResult > header {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.leftResult > span {
+  font-size: 15px;
+}
+
+.leftResult > p {
+  font-size: 19px;
+  margin-top: 1.2rem;
+}
+
+.skillDiv {
+  margin-top: 1.5rem;
+}
+
+.skillDiv > span {
+  background-color: #e1d9d731;
+  padding: 10px 15px;
+  border-radius: 10px;
+}
+
+.rightResult {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.rightResult > span:nth-child(1) {
+  font-size: 25px;
+}
+
+.rightResult > p {
+  display: flex;
+  align-self: flex-end;
+  gap: 0.2rem;
+  color: rgb(4, 173, 4);
+}
+
+.rightResult > p > span {
+  color: #000;
+}

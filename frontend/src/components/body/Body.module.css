@@ -1,0 +1,264 @@
+.body {
+  display: flex;
+  gap: 1rem;
+  margin: 2rem;
+  margin-top: 4rem;
+  /* background-color: #c7c7ca; */
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+  gap: 0.65rem;
+  padding: 10px 10px;
+}
+
+.btnDiv {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.btn {
+  display: flex;
+  padding: 10px 20px;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  outline: none;
+  font-weight: normal;
+  background-color: #da5828;
+  color: #ffffffe1;
+  border: none;
+}
+
+.leftSentence {
+  font-size: 50px;
+  /* text-transform: uppercase; */
+  font-weight: 600;
+  color: #050222d5;
+}
+.leftSecSentence {
+  font-size: 35px;
+  font-weight: 600;
+  color: #050222d5;
+}
+
+.leftThirdSentence {
+  font-size: 22px;
+  color: #050222d5;
+}
+
+.leftSentence > span {
+  color: #cc3700;
+}
+
+.right {
+  position: relative;
+  display: flex;
+
+  background: linear-gradient(#a82e02, #ffffffe7);
+  height: 400px;
+  width: 350px;
+
+  /* flex-direction: column; */
+  /* flex: 1; */
+  border-radius: 20px;
+}
+
+.mainTheme {
+  position: absolute;
+  right: 105px;
+  top: 10px;
+
+  height: 350px;
+}
+.reactTheme {
+  position: absolute;
+  height: 40px;
+  left: 50px;
+  top: 15px;
+}
+
+.nodeTheme {
+  position: absolute;
+  height: 80px;
+  left: 140px;
+  top: 60px;
+}
+
+.mongooTheme {
+  position: absolute;
+  height: 70px;
+  left: 140px;
+  top: 190px;
+}
+
+.expressTheme {
+  position: absolute;
+  height: 60px;
+  top: 360px;
+  left: 10px;
+}
+
+/*tab*/
+
+@media only screen and (max-width: 1100px) and (min-width: 720px) {
+  .leftSentence {
+    font-size: 36px;
+  }
+
+  .leftSecSentence {
+    font-size: 28px;
+  }
+
+  .btn {
+    padding: 9px 20px;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+  }
+
+  .body {
+    margin: 2rem;
+    margin-top: 3.2rem;
+  }
+
+  .right {
+    width: 300px;
+    height: 360px;
+  }
+
+  .mainTheme {
+    height: 250px;
+  }
+
+  .expressTheme {
+    top: 300px;
+  }
+}
+
+@media only screen and (max-width: 720px) and (min-width: 600px) {
+  .body {
+    display: flex;
+    flex-direction: column;
+  }
+  .leftSentence {
+    font-size: 35px;
+  }
+
+  .leftSecSentence {
+    font-size: 28px;
+  }
+
+  .btn {
+    padding: 9px 20px;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+  }
+
+  .body {
+    margin: 2rem;
+    margin-top: 3.2rem;
+  }
+
+  .right {
+    width: 300px;
+    height: 360px;
+    margin: auto;
+    margin-top: 1.5rem;
+  }
+
+  .mainTheme {
+    height: 250px;
+  }
+
+  .expressTheme {
+    top: 300px;
+  }
+}
+
+/* mobile */
+
+@media only screen and (max-width: 600px) and (min-width: 220px) {
+  .body {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.2rem;
+    align-items: center;
+  }
+
+  .left {
+    width: 100%;
+  }
+
+  .leftSentence {
+    width: 85%;
+    margin: auto;
+    font-size: 35px;
+  }
+
+  .leftSecSentence {
+    width: 85%;
+    margin: auto;
+    font-size: 28px;
+  }
+
+  .leftThirdSentence {
+    width: 85%;
+    margin: auto;
+  }
+
+  .btn {
+    padding: 9px 20px;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+  }
+
+  .btnDiv {
+    width: 80%;
+    margin: auto;
+    margin-top: 1.5rem;
+  }
+
+  .right {
+    display: flex;
+    width: 85%;
+    margin: auto;
+  }
+
+  .mainTheme {
+    height: 320px;
+    right: -15px;
+    top: 25px;
+  }
+
+  .reactTheme {
+    top: 120px;
+  }
+
+  .nodeTheme {
+    height: 50px;
+    top: -6px;
+
+    left: 155px;
+  }
+
+  .mongooTheme {
+    left: 300px;
+    top: 90px;
+  }
+
+  .expressTheme {
+    left: 110px;
+  }
+}

@@ -1,0 +1,654 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: rgba(173, 171, 168, 0.089);
+}
+
+.optionDiv {
+  display: none;
+}
+.headerDiv {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+}
+
+.icons {
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.topDiv {
+  display: flex;
+  gap: 5rem;
+  margin-top: 1rem;
+  background-color: #fff;
+  padding: 10px 25px;
+  width: max-content;
+}
+
+.topDiv > header {
+  color: #000;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.mainDiv {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  margin-top: -1.6rem;
+  gap: 1rem;
+}
+
+.startDiv {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 10px;
+  /* margin-top: 1rem; */
+  min-height: 78vh;
+}
+
+.headDiv {
+  display: flex;
+  margin: 1rem;
+  justify-content: space-around;
+  width: max-content;
+}
+
+.headDiv > article:nth-child(1) {
+  width: 410px;
+  font-size: 20px;
+  color: #686363ef;
+  text-transform: uppercase;
+}
+
+.headDiv > article:nth-child(2) {
+  width: 350px;
+  font-size: 20px;
+  color: #686363ef;
+  text-transform: uppercase;
+}
+
+.headDiv > article:nth-child(3) {
+  width: 150px;
+  font-size: 20px;
+  color: #686363ef;
+  text-transform: uppercase;
+}
+
+.headDiv > article:nth-child(4) {
+  width: 450px;
+  font-size: 20px;
+  color: #686363ef;
+  text-transform: uppercase;
+}
+.detailDiv {
+  display: flex;
+  width: max-content;
+  padding: 15px 15px;
+  background-color: #fff;
+  margin: 0.5rem;
+  justify-content: space-around;
+}
+
+.bioDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 380px;
+}
+
+.bioDiv > article {
+  font-size: 15px;
+  color: rgba(23, 23, 24, 0.685);
+}
+
+.skillDiv {
+  display: grid;
+  /* margin-bottom: 0.7rem; */
+  align-items: center;
+  grid-template-columns: 110px 180px;
+}
+
+.skillDiv > article {
+  font-size: 18px;
+  width: min-content;
+  padding: 8px 10px;
+  background-color: #6863636e;
+}
+
+.salaryDiv {
+  display: flex;
+  gap: 0.5rem;
+  width: 150px;
+  align-items: center;
+}
+
+.salaryDiv > article:nth-child(1) {
+  /* font-size: 25px; */
+  color: rgba(0, 128, 0, 0.658);
+}
+
+.salaryDiv > article:nth-child(2) {
+  font-size: 20px;
+  color: #686363d7;
+}
+.resultDiv {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  /* width: 150px; */
+}
+
+.icon {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.resultDiv > article {
+  font-size: 20px;
+}
+
+.actionDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  margin-left: 14rem;
+}
+.btn {
+  display: flex;
+  /* width: 30%; */
+  justify-content: center;
+  padding: 10px 20px;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: #ee1f04de;
+  color: #fff;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+  margin-top: 1rem;
+}
+
+.emptyDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 20rem;
+  left: 25rem;
+}
+
+.emptyDiv > article {
+  font-size: 35px;
+}
+
+.postDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 1rem;
+  /* margin-top: -1.8rem; */
+  min-height: 100vh;
+}
+
+.postBody {
+  display: flex;
+  /* margin: 1rem; */
+  background-color: #fff;
+  padding: 15px 25px;
+}
+
+.userDetails {
+  display: flex;
+  flex-direction: column;
+  width: 450px;
+  gap: 1rem;
+}
+
+.userDetails > header:nth-child(1) {
+  font-size: 25px;
+}
+
+.userDetails > article {
+  font-size: 22px;
+  color: #000;
+  font-weight: 100;
+}
+
+.duoDiv {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: -0.4rem;
+}
+
+.duoDiv > article {
+  font-size: 16px;
+  color: #686363ef;
+}
+
+.projectDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 150px;
+  /* justify-content:
+   center; */
+}
+
+.projectDiv > a {
+  font-size: 18px;
+  text-decoration: none;
+  color: #000;
+  font-weight: 600;
+}
+
+.jobBody {
+  display: flex;
+  margin: 1rem;
+  padding: 10px 25px;
+  background-color: #fff;
+}
+
+.jobDetailsDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 435px;
+}
+
+.jobDetailsDiv > article:nth-child(2) {
+  font-size: 18px;
+}
+
+.jobDetailsDiv > article:nth-child(3) {
+  font-size: 15.5px;
+  color: #686363ef;
+}
+
+.dateDiv {
+  width: 360px;
+}
+.dateDiv > article {
+  font-size: 18px;
+  color: #043bee9a;
+}
+.dueDiv > article {
+  font-size: 18px;
+  color: #ee1f049a;
+}
+
+.historyDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1rem;
+}
+
+.history {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: max-content;
+  background-color: #fff;
+  padding: 15px 20px;
+  border-radius: 10px;
+}
+
+.historyHeadDiv {
+  margin-bottom: 1px;
+  /* background-color: #fff; */
+}
+
+.historyBody {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.historyDuoDiv {
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+.historyDuoDiv > article:nth-child(1) {
+  font-size: 18px;
+}
+
+.historyDuoDiv > article:nth-child(2) {
+  font-size: 18px;
+  color: #494747f8;
+  margin-left: 5rem;
+}
+
+.postDetailDiv {
+  display: flex;
+  position: absolute;
+}
+.postDetailDiv > .icon {
+  font-size: 30px;
+}
+
+@media only screen and (max-width: 1300px) and (min-width: 990px) {
+  .headDiv {
+    display: none;
+    /* justify-content: space-evenly; */
+  }
+  .detailDiv {
+    gap: 4.5rem;
+    display: flex;
+    /* justify-content: ; */
+  }
+
+  .bioDiv {
+    width: 350px;
+  }
+
+  .skillDiv {
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .salaryDiv {
+    width: max-content;
+  }
+
+  .resultDiv {
+    width: max-content;
+  }
+
+  .actionDiv {
+    margin: 0rem;
+  }
+
+  .headDiv > article:nth-child(1) {
+    width: 60px;
+  }
+
+  .headDiv > article:nth-child(2) {
+    width: 80px;
+  }
+
+  .headDiv > article:nth-child(3) {
+    width: 60px;
+  }
+
+  .headDiv > article:nth-child(4) {
+    width: 80px;
+  }
+
+  .postBody {
+    width: max-content;
+    padding: 20px 30px;
+    border-radius: 15px;
+    gap: 3.5rem;
+  }
+
+  .userDetails {
+    width: max-content;
+  }
+
+  .userDetails > header:nth-child(1) {
+    font-size: 22px;
+  }
+
+  .userDetails > article {
+    font-size: 20px;
+  }
+
+  .projectDiv {
+    width: max-content;
+    justify-content: center;
+  }
+  .duoDiv > article {
+    font-size: 15px;
+  }
+
+  .jobBody {
+    gap: 3.5rem;
+  }
+
+  .dateDiv {
+    display: flex;
+    width: max-content;
+    align-items: center;
+  }
+
+  .dueDiv {
+    display: flex;
+    align-items: center;
+    width: max-content;
+  }
+  .jobBody > .actionDiv {
+    display: flex;
+    margin-top: 1.5rem;
+  }
+}
+
+@media only screen and (max-width: 995px) and (min-width: 810px) {
+  .topDiv > header {
+    font-size: 16px;
+  }
+  .headDiv {
+    display: none;
+  }
+  .mainDiv {
+    display: grid;
+    grid-template-columns: 380px 320px;
+    background-color: #66636300;
+  }
+
+  .startDiv {
+    background-color: transparent;
+  }
+
+  .startDiv > hr {
+    display: none;
+  }
+  .detailDiv {
+    flex-direction: column;
+    align-items: flex-start;
+    /* justify-content: center; */
+    padding: 20px 20px;
+    border-radius: 15px;
+    gap: 1.5rem;
+  }
+
+  .bioDiv {
+    display: flex;
+    width: max-content;
+  }
+  .skillDiv {
+    width: max-content;
+    gap: 1rem;
+  }
+  .skillDiv > article {
+    border-radius: 50%;
+  }
+
+  .actionDiv {
+    margin: 0;
+  }
+
+  .userDetails > header {
+    font-size: 2px;
+  }
+
+  .postDiv > hr {
+    display: none;
+  }
+
+  .postDiv {
+    display: grid;
+    grid-template-columns: 380px 350px;
+    /* margin: 0; */
+  }
+
+  .postBody {
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    padding: 20px 30px;
+    border-radius: 15px;
+    gap: 2em;
+  }
+
+  .userDetails {
+    width: max-content;
+  }
+
+  .userDetails > header:nth-child(1) {
+    font-size: 22px;
+  }
+
+  .userDetails > article {
+    font-size: 20px;
+  }
+
+  .projectDiv {
+    width: max-content;
+    justify-content: center;
+  }
+  .duoDiv > article {
+    font-size: 15px;
+  }
+
+  .jobBody {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: max-content;
+    padding: 20px 25px;
+  }
+
+  .dateDiv {
+    display: flex;
+    width: max-content;
+    align-items: center;
+  }
+
+  .dueDiv {
+    display: flex;
+    align-items: center;
+    width: max-content;
+  }
+  .jobBody > .actionDiv {
+    display: flex;
+    margin-top: 1.5rem;
+  }
+}
+
+@media only screen and (max-width: 810px) and (min-width: 160px) {
+  .headDiv {
+    display: none;
+  }
+  .mainDiv {
+    display: flex;
+    flex-direction: column;
+    background-color: #66636300;
+  }
+
+  .startDiv {
+    background-color: transparent;
+    align-items: center;
+  }
+
+  .startDiv > hr {
+    display: none;
+  }
+  .detailDiv {
+    flex-direction: column;
+    align-items: flex-start;
+    /* justify-content: center; */
+    padding: 20px 20px;
+    border-radius: 15px;
+    gap: 1.5rem;
+  }
+
+  .bioDiv {
+    display: flex;
+    width: max-content;
+  }
+  .skillDiv {
+    width: max-content;
+    gap: 1rem;
+  }
+  .skillDiv > article {
+    border-radius: 50%;
+  }
+
+  .actionDiv {
+    margin: 0;
+  }
+
+  .postBody {
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    padding: 20px 30px;
+    border-radius: 15px;
+    gap: 2em;
+  }
+
+  .userDetails {
+    width: max-content;
+  }
+
+  .userDetails > header:nth-child(1) {
+    font-size: 22px;
+  }
+
+  .userDetails > article {
+    font-size: 20px;
+  }
+
+  .projectDiv {
+    width: max-content;
+    justify-content: center;
+  }
+  .duoDiv > article {
+    font-size: 15px;
+  }
+
+  .jobBody {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: max-content;
+    padding: 20px 25px;
+  }
+
+  .dateDiv {
+    display: flex;
+    width: max-content;
+    align-items: center;
+  }
+
+  .dueDiv {
+    display: flex;
+    align-items: center;
+    width: max-content;
+  }
+  .jobBody > .actionDiv {
+    display: flex;
+    margin-top: 1.5rem;
+  }
+
+  .topDiv {
+    display: none;
+  }
+  .optionDiv {
+    margin-top: 1.5rem;
+    display: flex;
+  }
+}

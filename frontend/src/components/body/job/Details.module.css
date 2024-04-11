@@ -1,0 +1,160 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  background-color: #cccccc38;
+}
+
+.headerDiv {
+  display: flex;
+  align-items: center;
+  margin: 1rem;
+  gap: 1rem;
+  width: fit-content;
+  cursor: pointer;
+}
+
+.headerDiv > article {
+  font-size: 20px;
+}
+
+.topDiv {
+  display: flex;
+  background-color: #fff;
+  padding: 13px 25px;
+  margin: 1rem;
+  gap: 10rem;
+  /* width: fit-content; */
+  border-radius: 10px;
+  justify-content: space-between;
+}
+
+.leftDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  align-items: flex-start;
+}
+
+.leftDiv > header {
+  font-size: 30px;
+}
+
+.leftDiv > article {
+  font-size: 18px;
+  color: #b6b1b1;
+}
+
+.rightDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* gap: 0.8rem; */
+}
+
+.rightDiv > header {
+  font-size: 28px;
+  margin-bottom: rem;
+  margin-top: 0.8rem;
+}
+
+.duoDiv {
+  display: flex;
+  align-items: center;
+}
+.icons {
+  font-size: 20px;
+}
+
+.icon {
+  font-size: 20px;
+  color: rgba(0, 128, 0, 0.74);
+}
+
+.duoDiv > p {
+  font-size: 18px;
+  color: #00000079;
+}
+
+.rightSkill {
+  display: flex;
+  gap: 1rem;
+}
+.rightSkill > article {
+  font-size: 17px;
+  color: #00000079;
+  margin-top: 0.5rem;
+}
+
+.bodyDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #fff;
+  margin: 1rem;
+  margin-top: -2.5rem;
+  border-radius: 10px;
+  padding: 12px 25px;
+}
+
+.taskDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.taskDiv > header {
+  font-size: 28px;
+}
+
+.taskDiv > article {
+  font-size: 15px;
+  font-weight: 100;
+}
+
+.skillDiv {
+  display: flex;
+  margin-top: 2rem;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+.skillDiv > header {
+  font-size: 28px;
+}
+
+.skill {
+  background-color: #b6b1b1;
+  width: max-content;
+  padding: 10px 25px;
+  border-radius: 5%;
+  justify-content: center;
+}
+
+.skills {
+  display: grid;
+  grid-template-columns: 120px 250px;
+  gap: 1rem;
+}
+
+.skill > article {
+  font-size: 15px;
+  font-weight: 100;
+}
+
+.btn {
+  display: flex;
+  width: 18%;
+  justify-content: center;
+  padding: 10px;
+  font-size: 18px;
+  /* font-weight: 600; */
+  background-color: #ee1f04de;
+  color: #fff;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+  margin-top: 4rem;
+}

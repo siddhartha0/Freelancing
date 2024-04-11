@@ -1,0 +1,210 @@
+.mainDiv {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+  background-color: rgb(240, 245, 245);
+}
+
+.topDiv {
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  margin: 0.5rem;
+  gap: 1rem;
+}
+
+.topDiv > article {
+  font-size: 20px;
+}
+
+.icon {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.bodyDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  /* margin: 1rem; */
+}
+
+.bottomleftDiv {
+  background-color: #ee1f04de;
+  width: 60px;
+  height: 120px;
+  position: absolute;
+  bottom: 0;
+  left: -325px;
+  clip-path: polygon(0 0, 0% 100%, 100% 100%);
+  /* clip-path: polygon(46% 56%, 3% 100%, 0% 98%, 0% 1%); */
+}
+
+.topRightDiv {
+  background-color: #ee1f04de;
+  width: 70px;
+  height: 90px;
+  position: absolute;
+  top: 0;
+  right: -60px;
+  border-bottom-left-radius: 100%;
+  border-top-left-radius: 10%;
+  /* clip-path: polygon(100% 0, 45% 53%, 100% 100%); */
+}
+
+.profileContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #fff;
+  margin: auto;
+  width: 50%;
+  border-radius: 10px;
+  padding: 10px 10px;
+}
+
+.imgDiv {
+  border-radius: 50%;
+  background-color: transparent;
+}
+.profilePics {
+  height: 150px;
+}
+
+.informationDiv {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 1.5rem;
+}
+
+.duoDiv {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.duoDiv > article {
+  font-size: 16px;
+}
+
+.toDoDiv {
+  display: flex;
+  gap: 2rem;
+  width: 90%;
+  margin: auto;
+}
+
+.addDiv {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  background-color: #fff;
+  flex: 2;
+  border-radius: 20px;
+
+  gap: 1.5rem;
+  overflow-y: scroll;
+}
+
+.addDiv::-webkit-scrollbar {
+  display: none;
+}
+
+.addDiv > header {
+  align-self: center;
+}
+
+.finishedDiv {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  background-color: #fff;
+  border-radius: 10px;
+  flex: 2;
+  overflow-y: scroll;
+  gap: 1.5rem;
+}
+.finishedDiv::-webkit-scrollbar {
+  display: none;
+}
+
+.finishedDiv > header {
+  align-self: center;
+}
+
+.inputDiv {
+  display: flex;
+  justify-content: space-around;
+}
+
+.input {
+  font-size: 16px;
+  color: #000;
+  border: none;
+  outline: none;
+  background-color: rgb(240, 245, 245);
+  width: 60%;
+  padding: 5px 20px;
+}
+
+.btn {
+  display: flex;
+  width: 15%;
+  justify-content: center;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #ee1f04de;
+  color: #fff;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.showToDo {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.showToDoDiv {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-around;
+}
+
+.buttonDiv {
+  display: flex;
+  /* flex-direction: column; */
+  gap: 1rem;
+  justify-content: center;
+}
+
+.buttonDiv > button {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  /* background-color: #ee1f04de; */
+  color: #fff;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.showToDoDiv > article {
+  font-size: 16px;
+  margin-left: 2rem;
+  width: 70%;
+}
+
+.finishedDiv > article {
+  font-size: 18px;
+  margin-left: 2rem;
+}

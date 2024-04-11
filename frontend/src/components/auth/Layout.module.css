@@ -1,0 +1,111 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.topDiv {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.borderDiv {
+  width: 2px;
+  height: 38px;
+  background-color: rgba(219, 63, 6, 0.897);
+}
+
+.login {
+  display: flex;
+
+  justify-content: center;
+  gap: 2.8rem;
+}
+
+.leftDiv {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(219, 63, 6, 0.897);
+  color: #fff;
+  padding: 10px 25px;
+  width: 250px;
+}
+
+.leftDiv > p {
+  font-size: 45px;
+  margin: 1rem;
+  font-weight: 600;
+}
+
+.leftDiv > article {
+  font-size: 14px;
+  font-weight: 100;
+  margin: 1rem;
+  color: #ffffff67;
+}
+
+.logo {
+  height: 25px;
+  width: 85px;
+  display: flex;
+  align-self: flex-end;
+  margin: 1rem;
+}
+
+.loginDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+.register {
+  display: flex;
+  width: 90%;
+  margin: auto;
+  justify-content: center;
+
+  gap: 1rem;
+}
+
+.registerDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+.rightDiv {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(219, 63, 6, 0.897);
+  color: #fff;
+  padding: 10px 25px;
+  width: 300px;
+  /* margin-right: 18rem; */
+}
+
+.rightDiv > P {
+  font-size: 45px;
+  margin: 1rem;
+  font-weight: 600;
+}
+
+.rightDiv > article {
+  font-size: 14px;
+  font-weight: 100;
+  margin: 1rem;
+  color: #ffffff67;
+}
+
+@media only screen and (max-width: 820px) and (min-width: 150px) {
+  .login {
+    flex-direction: column-reverse;
+  }
+  .register {
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+/* mobile */
+
+@media only screen and (max-width: 600px) and (min-width: 220px) {
+}
