@@ -6,15 +6,13 @@ import { FaPhone, FaLocationArrow } from "react-icons/fa6";
 import profile from "../../../assets/noUser.jpg";
 import ToDo from "./ToDo";
 import { useNavigate, useParams } from "react-router";
-import { useSelector } from "react-redux";
-import { getJobsPost } from "../../slices/PostSlice";
 import Userapi from "../../api/Userapi";
 import Jobapi from "../../api/Jobapi";
+import { DragDropContext } from "react-beautiful-dnd";
 
 function AcceptedClientPage() {
   const nav = useNavigate();
   const { id } = useParams();
-  const jobDetails = useSelector(getJobsPost);
   const [clientDetails, setClientDetails] = useState({});
   const [selectedJobDetails, setSelectedJobDetails] = useState({});
 
@@ -27,53 +25,83 @@ function AcceptedClientPage() {
       if (getClient.data) {
         setClientDetails(getClient.data.user);
       }
+      console.log(job.data.details);
     };
     fetchData();
-  }, []);
+  }, [id]);
 
   return (
-    <div className={css.mainDiv}>
-      <div className={css.topDiv}>
-        <IoChevronBack className={css.icon} onClick={() => nav("/notify")} />
-        <article>Client Details</article>
-      </div>
+    <DragDropContext>
+      <div className={css.mainDiv}>
+        <div className={css.topDiv}>
+          <IoChevronBack className={css.icon} onClick={() => nav("/notify")} />
+          <article>Client Details</article>
+        </div>
 
-      <div className={css.bodyDiv}>
-        <container className={css.profileContainer}>
-          <div className={css.imgDiv}>
-            <img src={profile} alt="profile" className={css.profilePics} />
+        <div className={css.bodyDiv}>
+          <div className={css.bodyTopDiv}>
+            <container className={css.profileContainer}>
+              <div className={css.imgDiv}>
+                <img src={profile} alt="profile" className={css.profilePics} />
+              </div>
+
+              <div className={css.informationDiv}>
+                <div className={css.topRightDiv}></div>
+                <header className={css.headDiv}>
+                  <article>{clientDetails.jobTitle}</article>
+                </header>
+                <container className={css.duoDiv}>
+                  <FaUser className={css.logo} />
+                  <article>{clientDetails.name}</article>
+                </container>
+                <container className={css.duoDiv}>
+                  <FaLocationArrow className={css.logo} />
+                  <article>{clientDetails.address}</article>
+                </container>
+                <container className={css.duoDiv}>
+                  <IoMailOutline className={css.logo} />
+                  <article>{clientDetails.email}</article>
+                </container>
+                <container className={css.duoDiv}>
+                  <FaPhone className={css.logo} />
+                  <article>{clientDetails.contact}</article>
+                </container>
+              </div>
+            </container>
+
+            <container className={css.profileContainer}>
+              <div className={css.informationDiv}>
+                <div className={css.topRightDiv}></div>
+                <header className={css.headDiv}>
+                  <article>{clientDetails.jobTitle}</article>
+                </header>
+                <container className={css.duoDiv}>
+                  <FaUser className={css.logo} />
+                  <article>{clientDetails.name}</article>
+                </container>
+                <container className={css.duoDiv}>
+                  <FaLocationArrow className={css.logo} />
+                  <article>{clientDetails.address}</article>
+                </container>
+                <container className={css.duoDiv}>
+                  <IoMailOutline className={css.logo} />
+                  <article>{clientDetails.email}</article>
+                </container>
+                <container className={css.duoDiv}>
+                  <FaPhone className={css.logo} />
+                  <article>{clientDetails.contact}</article>
+                </container>
+              </div>
+            </container>
           </div>
 
-          <div className={css.informationDiv}>
-            <div className={css.topRightDiv}></div>
-            <header className={css.headDiv}>
-              <article>{clientDetails.jobTitle}</article>
-            </header>
-            <container className={css.duoDiv}>
-              <FaUser className={css.logo} />
-              <article>{clientDetails.name}</article>
-            </container>
-            <container className={css.duoDiv}>
-              <FaLocationArrow className={css.logo} />
-              <article>{clientDetails.address}</article>
-            </container>
-            <container className={css.duoDiv}>
-              <IoMailOutline className={css.logo} />
-              <article>{clientDetails.email}</article>
-            </container>
-            <container className={css.duoDiv}>
-              <FaPhone className={css.logo} />
-              <article>{clientDetails.contact}</article>
-            </container>
-          </div>
-        </container>
-
-        <ToDo
-          selectedJobDetails={selectedJobDetails}
-          setSelectedJobDetails={setSelectedJobDetails}
-        />
+          <ToDo
+            selectedJobDetails={selectedJobDetails}
+            setSelectedJobDetails={setSelectedJobDetails}
+          />
+        </div>
       </div>
-    </div>
+    </DragDropContext>
   );
 }
 

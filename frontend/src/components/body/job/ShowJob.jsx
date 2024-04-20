@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import css from "./ShowJob.module.css";
 import { IoFilterOutline } from "react-icons/io5";
 import { useNavigate } from "react-router";
@@ -9,17 +9,78 @@ import { getJobsPost } from "../../slices/PostSlice";
 function ShowJob({ searchInput }) {
   const job = useSelector(getJobsPost);
   const nav = useNavigate();
-  console.log(job.jobs);
+  const [showJobs, setShowJobs] = useState();
+  const [getFilterOption, setFilterOption] = useState(false);
+  const [status, setStatus] = useState("Recently Posted");
+
+  const ref = useRef();
+
+  const clickOutSide = (e) => {
+    if (ref.current && !ref.current.contains(e.target)) {
+      setFilterOption(false);
+    }
+  };
+
+  const filterByLatestJobs = () => {
+    const getJob = job.jobs.filter((job) => !job.acceptedClientId);
+    setShowJobs(getJob);
+    setStatus("Recently posted");
+  };
+
+  useEffect(() => {
+    const getJob = job.jobs.filter((job) => !job.acceptedClientId);
+    setShowJobs(getJob);
+
+    document.addEventListener("mousedown", clickOutSide);
+    return () => document.removeEventListener("mousedown", clickOutSide);
+  }, [job]);
+
+  const getallJobs = () => {
+    const allJobs = job.jobs.map((job) => job);
+    setShowJobs(allJobs);
+    setStatus("all jobs");
+  };
+
+  const filterByRecentlyaccepted = () => {
+    const filterJob = job.jobs.filter((job) => job.acceptedClientId);
+    setShowJobs(filterJob);
+    setStatus("accepted jobs");
+  };
 
   return (
     <div className={css.container}>
       <div className={css.topDiv}>
-        <IoFilterOutline className={css.icon} />
-        <span>Filter</span>
+        <div className={css.iconDiv} onClick={() => setFilterOption(true)}>
+          <IoFilterOutline className={css.icon} />
+          <span>Filter</span>
+        </div>
+
+        {getFilterOption && (
+          <div
+            className={css.optionDiv}
+            ref={ref}
+            onClick={() => setFilterOption(false)}
+          >
+            <p onClick={filterByLatestJobs}>Latest Jobs</p>
+            <p onClick={filterByRecentlyaccepted}>Recently accepted</p>
+            <p onClick={getallJobs}>all</p>
+          </div>
+        )}
       </div>
+
+      <article
+        style={{
+          alignSelf: "flex-end",
+          fontWeight: 500,
+          textTransform: "capitalize",
+        }}
+      >
+        {status}
+      </article>
+
       <div className={css.leftDiv}>
-        {job.jobs &&
-          job.jobs
+        {showJobs &&
+          showJobs
             .filter((job) =>
               job.postTitle.toLowerCase().includes(searchInput.toLowerCase())
             )

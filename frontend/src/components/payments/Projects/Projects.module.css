@@ -1,0 +1,93 @@
+.mainDiv {
+  display: flex;
+  gap: 1.5rem;
+  flex-direction: column;
+}
+
+.topDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.infoDiv {
+  display: grid;
+  grid-template-columns: 280px 280px 280px;
+  gap: 2rem;
+}
+
+.inputDiv {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  padding: 5px 10px;
+  border-radius: 8px;
+
+  border: 1px solid rgba(153, 143, 143, 0.5);
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border-top: 0px;
+  max-width: 250px;
+  box-shadow: 5px 5px 5px #e4e0e0;
+}
+
+.input {
+  font-size: 16px;
+  color: #000;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  width: 100%;
+  padding: 2px 0px;
+}
+
+.inputDiv > label {
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+.btn {
+  display: flex;
+  width: 14%;
+  justify-content: center;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #ee1f04de;
+  color: #fff;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+  margin-top: 3rem;
+  text-transform: uppercase;
+}
+
+.dropDown {
+  padding: 8px 0px;
+  border: none;
+  background: #fff;
+  color: #000;
+  outline: none;
+  opacity: 0.6;
+  font-weight: 600;
+}
+
+.payBtns {
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+  gap: 1rem;
+  width: 30%;
+}
+
+.wholeDiv {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btnDiv {
+  display: flex;
+}

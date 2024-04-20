@@ -120,7 +120,7 @@ function PostJob() {
             <input
               type="radio"
               name="salary"
-              value="Hourly"
+              value="completed"
               onChange={(e) =>
                 setInputField({
                   ...inputField,
@@ -128,7 +128,7 @@ function PostJob() {
                 })
               }
             />
-            <label htmlFor="">Hourly</label>
+            <label>Project Completion</label>
             <input
               type="radio"
               name="salary"

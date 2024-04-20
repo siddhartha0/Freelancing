@@ -13,6 +13,10 @@ class applicationapi {
   rejectapplication(id) {
     return axios.delete(appUrl + "/rejectapplication/" + id);
   }
+
+  getMyapplication(id) {
+    return axios.get(appUrl + "/myapplication/" + id);
+  }
 }
 
 export default new applicationapi();

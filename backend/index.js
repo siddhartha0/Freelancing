@@ -10,6 +10,7 @@ const mongoose = require("mongoose");
 const applicationController = require("./controller/applicationController");
 const env = require("dotenv");
 // const json = require("json()");
+env.config();
 
 app.use(express.json());
 app.use(cors());
@@ -22,7 +23,9 @@ app.use("/application", applicationController);
 app.use(express.static("public"));
 app.use("/cv", express.static("cv"));
 
-env.config();
+app.get("/config/paypal", (client, server) =>
+  server.send({ id: process.env.PAYPAl_CLIENT_ID })
+);
 
 mongoose.connect(process.env.MONGO_USER, {
   useNewUrlParser: true,

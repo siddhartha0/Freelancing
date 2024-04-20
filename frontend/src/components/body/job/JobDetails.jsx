@@ -19,6 +19,7 @@ function JobDetails() {
   const document = useRef();
   const [userId, setuserId] = useState("");
   const [alreadyapplied, setalreadyapplied] = useState(false);
+  const [ownerDetails, setOwnerDetails] = useState();
 
   useEffect(() => {
     const fetchJobDetails = async () => {
@@ -30,6 +31,9 @@ function JobDetails() {
       setuserId(Id);
       const user = await Userapi.getById(Id);
       setUserDetails(user);
+      // console.log(result.data.details);
+      const ownerId = await Userapi.getById(result.data.details.ownerId);
+      setOwnerDetails(ownerId.data.user);
       result.data.details.clientId.map((id) =>
         id === Id ? setalreadyapplied(true) : setalreadyapplied(false)
       );
@@ -88,14 +92,26 @@ function JobDetails() {
         />
         <article>Back To Job</article>
       </div>
-      {alreadyapplied && (
-        <article>You have already submitted your proposal</article>
-      )}
+
+      <div className={css.statusDiv}>
+        {alreadyapplied && (
+          <article>You have already submitted your proposal</article>
+        )}
+      </div>
       <div className={css.topDiv}>
         <div className={css.leftDiv}>
           <header>{postDetails.postTitle}</header>
-          <article>Deadline Date</article>
-          <article>{postDetails.deadlineDate}</article>
+
+          <div className={css.basicInfo}>
+            <div className={css.dateDiv}>
+              <article>Posted By</article>
+              <article>{ownerDetails?.name}</article>
+            </div>
+            <div className={css.dateDiv}>
+              <article>Deadline Date</article>
+              <article>{postDetails.deadlineDate}</article>
+            </div>
+          </div>
         </div>
 
         <div className={css.rightDiv}>
@@ -138,7 +154,11 @@ function JobDetails() {
         <button
           className={css.btn}
           onClick={() => sendCv()}
-          style={alreadyapplied ? { cursor: "not-allowed" } : {}}
+          style={
+            alreadyapplied
+              ? { cursor: "not-allowed", pointerEvents: "none" }
+              : {}
+          }
         >
           Send Your Application
         </button>

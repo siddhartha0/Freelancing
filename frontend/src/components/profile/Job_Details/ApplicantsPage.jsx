@@ -21,20 +21,10 @@ export default function ApplicantsPage({
       const jobs = await applicationapi.getapplication();
       const oneJob = jobs.data.body.filter((job) => job.jobId === jobId);
       setJobDetails(oneJob);
+      console.log(oneJob);
     };
     fetchJobs();
   }, []);
-
-  const acceptApplication = async (jobs) => {
-    const jobDetails = await Jobapi.searchingJob(jobs.jobId);
-    const acceptClient = {
-      ...jobDetails.data.details,
-      acceptedClientId: jobs.userId,
-      projectTaken: true,
-    };
-    const result = await Jobapi.updateJobDetails(acceptClient);
-    if (result.status === 200) toast.success("Have a great run");
-  };
 
   const nav = useNavigate();
 
@@ -56,7 +46,6 @@ export default function ApplicantsPage({
               <article
                 style={{ cursor: "pointer" }}
                 onClick={() => {
-                  console.log(jobs);
                   nav(`/clientProfile/${jobs.userId}`);
                 }}
               >
@@ -64,7 +53,7 @@ export default function ApplicantsPage({
               </article>
               <div className={css.cvDiv}>
                 <div className={css.pdfView}>
-                  <a href={`/viewPdf/${jobs.name}`} target="_blank">
+                  <a href={`/viewPdf/${jobs.name}`} target="blank">
                     {jobs.name}
                   </a>
                 </div>
@@ -72,7 +61,7 @@ export default function ApplicantsPage({
               <div className={css.btnDiv}>
                 <button
                   className={css.btn}
-                  onClick={() => acceptApplication(jobs)}
+                  onClick={() => nav(`/acceptapplication/${jobs._id}`)}
                 >
                   Accept
                 </button>

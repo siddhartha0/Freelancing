@@ -39,16 +39,13 @@ export default function SearchJob() {
           />
         </div>
         <div className={css.rightDiv}>
-          <div className={css.picsDiv}>
-            {!userDetails ? (
-              <img src={noUser} alt="" />
-            ) : (
-              <img src={profile} alt="profile" />
-            )}
-          </div>
-          <div className={css.profileDiv}>
-            <header>{!userDetails ? "Sign In" : userDetails.user.name}</header>
-          </div>
+          {!userDetails ? (
+            <img src={noUser} alt="" />
+          ) : (
+            <img src={profile} alt="profile" />
+          )}
+
+          <article>{!userDetails ? "Sign In" : userDetails.user.name}</article>
         </div>
       </div>
 

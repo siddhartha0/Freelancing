@@ -41,20 +41,14 @@ router.get("/getPostById/:id", async (client, server) => {
 
 router.put("/updateJobPost", async (client, server) => {
   try {
-    const ownerId = client.body.ownerId;
-    const updatingBoi = client.body.updatingBoiId;
-
     const jobDetails = client.body;
-    console.log(jobDetails);
 
-    const toSave = await postModel.findByIdAndUpdate(
-      jobDetails._id,
-      jobDetails
-    );
+    await postModel.findByIdAndUpdate(jobDetails._id, jobDetails);
 
     server.status(200).json({ msg: "Changed your mind", details: jobDetails });
   } catch (error) {
     server.status(400).json({ msg: "This ain't your property" });
+    console.log(error);
   }
 });
 

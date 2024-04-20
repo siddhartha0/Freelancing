@@ -1,5 +1,6 @@
 import React from "react";
 import { parseISO, formatDistanceToNow } from "date-fns";
+import { parse } from "date-fns";
 
 const CalculateTime = ({ time }) => {
   let showTime = "";

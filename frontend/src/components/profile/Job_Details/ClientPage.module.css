@@ -30,6 +30,12 @@
   /* margin: 1rem; */
 }
 
+.bodyTopDiv {
+  display: flex;
+  gap: 3rem;
+  padding: 10px 30px;
+}
+
 .bottomleftDiv {
   background-color: #ee1f04de;
   width: 60px;
@@ -58,7 +64,6 @@
   align-items: center;
   justify-content: space-around;
   background-color: #fff;
-  margin: auto;
   width: 50%;
   border-radius: 10px;
   padding: 10px 10px;

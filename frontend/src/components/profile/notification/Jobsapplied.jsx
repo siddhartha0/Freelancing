@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import css from "./Notification.module.css";
-import Userapi from "../../api/Userapi";
+
 function Jobsapplied({ yourappliedJobs, userID }) {
   useEffect(() => {
-    console.log(yourappliedJobs);
     yourappliedJobs.map((job) => console.log(job.acceptedClientId));
-    console.log(userID);
-  }, []);
+  }, [yourappliedJobs, userID]);
   // console.log(userID);
   return (
     <div className={css.mainDiv}>

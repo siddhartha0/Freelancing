@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
@@ -15,6 +14,11 @@ import { Store } from "./components/store/Store";
 import { fetchJobs } from "./components/slices/PostSlice";
 import AcceptedClientPage from "./components/profile/Job_Details/AcceptedClientPage";
 import ClientPendingDetails from "./components/profile/Job_Details/ClientPendingDetails";
+import Payment from "./components/payments/Payment";
+import ClientDetails from "./components/payments/ClientDetails/ClientDetails";
+import Projects from "./components/payments/Projects/Projects";
+
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 console.log("Main Lobby");
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -23,21 +27,31 @@ Store.dispatch(fetchJobs());
 
 root.render(
   <Provider store={Store}>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}></Route>
-        <Route path="/searchJob" element={<SearchJob />}></Route>
-        <Route path="/post" element={<PostJob />}></Route>
-        <Route path="/jobDetails/:id" element={<JobDetails />}></Route>
+    <PayPalScriptProvider deferLoading={false}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />}></Route>
+          <Route path="/searchJob" element={<SearchJob />}></Route>
+          <Route path="/post" element={<PostJob />}></Route>
+          <Route path="/jobDetails/:id" element={<JobDetails />}></Route>
 
-        <Route path="/profile" element={<Profile />}></Route>
-        <Route path="/notify" element={<Notification />}></Route>
-        <Route path="/clientProfile/:id" element={<ClientProfile />} />
-        <Route path="/viewPdf/:pdf" element={<ViewPdf />} />
-        <Route path="/acceptedClient/:id" element={<AcceptedClientPage />} />
+          <Route path="/profile" element={<Profile />}></Route>
+          <Route path="/notify" element={<Notification />}></Route>
+          <Route path="/clientProfile/:id" element={<ClientProfile />} />
+          <Route path="/viewPdf/:pdf" element={<ViewPdf />} />
+          <Route path="/acceptedClient/:id" element={<AcceptedClientPage />} />
 
-        <Route path="/pendingJob/:id" element={<ClientPendingDetails />} />
-      </Routes>
-    </BrowserRouter>
+          <Route path="/pendingJob/:id" element={<ClientPendingDetails />} />
+
+          <Route path="/acceptapplication/:id" element={<Payment />}>
+            <Route index element={<ClientDetails />} />
+            <Route
+              path="/acceptapplication/:id/project"
+              element={<Projects />}
+            />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </PayPalScriptProvider>
   </Provider>
 );

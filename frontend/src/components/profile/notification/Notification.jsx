@@ -4,7 +4,6 @@ import { MdArrowBackIos, MdMenu } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
 import { useNavigate } from "react-router";
 import Jobapi from "../../api/Jobapi";
-import applicationapi from "../../api/applicationapi";
 import PostedDetails from "../Job_Details/PostedDetails";
 import Jobsapplied from "./Jobsapplied";
 import PostedJobs from "./PostedJobs";
@@ -13,10 +12,7 @@ import PendingJobs from "./PendingJobs";
 
 function Notification() {
   const nav = useNavigate();
-  const [appliedJob, setappliedJob] = useState(true);
-  const [postedJobs, setPostedJob] = useState(false);
-  const [pendingJobs, setPendingJob] = useState(false);
-  const [completedJob, setCompletedJob] = useState(false);
+  const [getactiveHeader, setactiveHeader] = useState(1);
   const [yourPostedJobs, setYourPostedJobs] = useState([]);
   const [yourappliedJobs, setyourappliedJobs] = useState([]);
   const [seeDetails, setSeeDetails] = useState(false);
@@ -24,6 +20,25 @@ function Notification() {
   const [finishedProjects, setFinishedProjects] = useState([]);
   const [userID, setuserID] = useState("");
   const [assignedJob, setAssignedJob] = useState([]);
+
+  const headerData = [
+    {
+      id: 1,
+      header: "applied Jobs",
+    },
+    {
+      id: 2,
+      header: "Posted Jobs",
+    },
+    {
+      id: 3,
+      header: "Pending Jobs",
+    },
+    {
+      id: 4,
+      header: "Completed Jobs",
+    },
+  ];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,7 +50,7 @@ function Notification() {
         (job) => job.ownerId === userId
       );
       const yourPendingJobs = jobs.data.JobPost.filter(
-        (job) => job.acceptedClientId == userId && job.completed === false
+        (job) => job.acceptedClientId === userId && job.completed === false
       );
 
       const finished = jobs.data.JobPost.filter(
@@ -73,82 +88,33 @@ function Notification() {
           </div>
 
           <div className={css.topDiv}>
-            <header
-              onClick={() => {
-                setappliedJob(true);
-                setCompletedJob(false);
-                setPendingJob(false);
-                setPostedJob(false);
-              }}
-              style={
-                appliedJob
-                  ? {
-                      borderBottom: ".5px solid #ee1f04de",
-                    }
-                  : {}
-              }
-            >
-              Applied Jobs
-            </header>
-            <header
-              onClick={() => {
-                setPostedJob(true);
-                setCompletedJob(false);
-                setPendingJob(false);
-                setappliedJob(false);
-              }}
-              style={
-                postedJobs
-                  ? {
-                      borderBottom: ".5px solid #ee1f04de",
-                    }
-                  : {}
-              }
-            >
-              Posted Jobs
-            </header>
-            <header
-              onClick={() => {
-                setPostedJob(false);
-                setCompletedJob(false);
-                setPendingJob(true);
-                setappliedJob(false);
-              }}
-              style={
-                pendingJobs
-                  ? {
-                      borderBottom: ".5px solid #ee1f04de",
-                    }
-                  : {}
-              }
-            >
-              Pending Jobs
-            </header>
-            <header
-              onClick={() => {
-                setPostedJob(false);
-                setCompletedJob(true);
-                setPendingJob(false);
-                setappliedJob(false);
-              }}
-              style={
-                completedJob
-                  ? {
-                      borderBottom: ".5px solid #ee1f04de",
-                    }
-                  : {}
-              }
-            >
-              Completed Jobs
-            </header>
+            {headerData.map((data) => (
+              <header
+                id={data.header}
+                onClick={() => {
+                  setactiveHeader(data.id);
+                }}
+                style={
+                  data.id === getactiveHeader
+                    ? {
+                        borderBottom: ".5px solid #ee1f04de",
+                      }
+                    : {
+                        opacity: 0.6,
+                      }
+                }
+              >
+                {data.header}
+              </header>
+            ))}
           </div>
         </div>
 
         <div className={css.bodyDiv}>
-          {appliedJob && (
+          {getactiveHeader === 1 && (
             <Jobsapplied yourappliedJobs={yourappliedJobs} userID={userID} />
           )}
-          {postedJobs && (
+          {getactiveHeader === 2 && (
             <PostedJobs
               yourPostedJobs={yourPostedJobs}
               setSeeDetails={setSeeDetails}
@@ -156,8 +122,8 @@ function Notification() {
               setYourPostedJobs={setYourPostedJobs}
             />
           )}
-          {pendingJobs && <PendingJobs assignedJob={assignedJob} />}
-          {completedJob && (
+          {getactiveHeader === 3 && <PendingJobs assignedJob={assignedJob} />}
+          {getactiveHeader === 4 && (
             <CompletedJobs finishedProjects={finishedProjects} />
           )}
         </div>

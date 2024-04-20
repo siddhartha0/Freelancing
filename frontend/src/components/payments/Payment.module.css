@@ -1,0 +1,57 @@
+.mainDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1rem;
+}
+
+.leftDiv {
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+}
+
+.clientDetails {
+  margin: 3rem;
+  margin-top: -0rem;
+}
+
+.rightDiv {
+  display: flex;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.icon {
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.infoDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.infoDiv > span {
+  font-size: 16px;
+  line-height: 15px;
+  color: black;
+  font-weight: 600;
+  opacity: 0.5;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.progressDiv {
+  background: #000;
+  width: 150px;
+  opacity: 0.5;
+
+  height: 0.1rem;
+}

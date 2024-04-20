@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const Base_api = "http://localhost:3333/job/";
+const paypal_api = "http://localhost:3333/config/paypal";
 
 class Jobapi {
   postJob(jobDetails) {
@@ -18,6 +19,9 @@ class Jobapi {
   }
   deleteJobDetails(jobDetails) {
     return axios.delete(Base_api + "deletePost", jobDetails);
+  }
+  getClientId() {
+    return axios.get(paypal_api);
   }
 }
 

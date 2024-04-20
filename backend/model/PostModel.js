@@ -33,10 +33,25 @@ const table = new mongoose.Schema({
     type: String,
     default: "",
   },
+
+  projectDuration: {
+    type: String,
+    default: "1",
+  },
+
+  clientRecivedSalary: {
+    type: Number,
+  },
+
+  moneySentPerSalaryStatus: {
+    type: Number,
+  },
+
   projectTaken: {
     type: Boolean,
     default: false,
   },
+
   deadlineDate: {
     type: String,
   },

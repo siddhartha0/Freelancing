@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import css from "./ClientPage.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { getJobsPost, updateJob } from "../../slices/PostSlice";
-import Jobapi from "../../api/Jobapi";
+import { useDispatch } from "react-redux";
+import { updateJob } from "../../slices/PostSlice";
 
 function ToDo({ selectedJobDetails, setSelectedJobDetails }) {
   const [newWork, setNewWork] = useState("");
@@ -69,7 +68,9 @@ function ToDo({ selectedJobDetails, setSelectedJobDetails }) {
         <header>Finished Work</header>
         {selectedJobDetails?.finishedToDos?.length > 0 ? (
           selectedJobDetails.finishedToDos.map((toDo, i) => (
-            <article key={i}>{toDo}</article>
+            <article key={i} index={i}>
+              {toDo}
+            </article>
           ))
         ) : (
           <article

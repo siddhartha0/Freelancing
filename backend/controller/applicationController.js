@@ -31,8 +31,12 @@ router.delete("/rejectapplication/:id", async (client, server) => {
   } catch (error) {}
 });
 
-router.post("/acceptApplication/:id", async (client, server) => {
+router.get("/myapplication/:id", async (client, server) => {
   try {
+    const check = await model.findById(client.params.id);
+    if (check) {
+      server.status(200).send(check);
+    }
   } catch (err) {}
 });
 
