@@ -16,7 +16,7 @@ export default function SearchJob() {
     const fetchData = async () => {
       const userId = JSON.parse(localStorage.getItem("userId"));
       const result = await Userapi.getById(userId);
-      console.log(result.data);
+
       setuserDetails(result.data);
     };
     fetchData();

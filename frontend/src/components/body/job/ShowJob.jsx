@@ -5,6 +5,8 @@ import { useNavigate } from "react-router";
 import CalculateTime from "../CalculateTime";
 import { useSelector } from "react-redux";
 import { getJobsPost } from "../../slices/PostSlice";
+import { getUser } from "../../slices/UserSlice";
+import { recommend } from "../../payments/utils/Helper";
 
 function ShowJob({ searchInput }) {
   const job = useSelector(getJobsPost);
@@ -12,6 +14,7 @@ function ShowJob({ searchInput }) {
   const [showJobs, setShowJobs] = useState();
   const [getFilterOption, setFilterOption] = useState(false);
   const [status, setStatus] = useState("Recently Posted");
+  const user = useSelector(getUser);
 
   const ref = useRef();
 
@@ -20,13 +23,6 @@ function ShowJob({ searchInput }) {
       setFilterOption(false);
     }
   };
-
-  const filterByLatestJobs = () => {
-    const getJob = job.jobs.filter((job) => !job.acceptedClientId);
-    setShowJobs(getJob);
-    setStatus("Recently posted");
-  };
-
   useEffect(() => {
     const getJob = job.jobs.filter((job) => !job.acceptedClientId);
     setShowJobs(getJob);
@@ -35,16 +31,25 @@ function ShowJob({ searchInput }) {
     return () => document.removeEventListener("mousedown", clickOutSide);
   }, [job]);
 
-  const getallJobs = () => {
-    const allJobs = job.jobs.map((job) => job);
-    setShowJobs(allJobs);
-    setStatus("all jobs");
+  const filterByLatestJobs = () => {
+    const getJob = job.jobs.filter((job) => !job.acceptedClientId);
+    setShowJobs(getJob);
+    setStatus("Recently posted");
   };
 
   const filterByRecentlyaccepted = () => {
     const filterJob = job.jobs.filter((job) => job.acceptedClientId);
     setShowJobs(filterJob);
-    setStatus("accepted jobs");
+    setStatus("Taken jobs");
+  };
+
+  const recomendToUser = () => {
+    const userSkills = user.skill[0].skill;
+    const getJob = job.jobs.filter((job) => !job.acceptedClientId);
+
+    const jobs = recommend(userSkills, getJob);
+    setShowJobs(jobs);
+    setStatus("Recommended Jobs");
   };
 
   return (
@@ -61,9 +66,9 @@ function ShowJob({ searchInput }) {
             ref={ref}
             onClick={() => setFilterOption(false)}
           >
+            <p onClick={recomendToUser}>Recommended</p>
             <p onClick={filterByLatestJobs}>Latest Jobs</p>
-            <p onClick={filterByRecentlyaccepted}>Recently accepted</p>
-            <p onClick={getallJobs}>all</p>
+            <p onClick={filterByRecentlyaccepted}>Recently Taken</p>
           </div>
         )}
       </div>
@@ -79,7 +84,7 @@ function ShowJob({ searchInput }) {
       </article>
 
       <div className={css.leftDiv}>
-        {showJobs &&
+        {showJobs?.length >= 1 ? (
           showJobs
             .filter((job) =>
               job.postTitle.toLowerCase().includes(searchInput.toLowerCase())
@@ -113,7 +118,10 @@ function ShowJob({ searchInput }) {
                   <span>{jobs.salaryStatus}</span>
                 </div>
               </div>
-            ))}
+            ))
+        ) : (
+          <article>No Job in this section</article>
+        )}
       </div>
     </div>
   );

@@ -9,8 +9,10 @@ import { useNavigate, useParams } from "react-router";
 import Userapi from "../../api/Userapi";
 import Jobapi from "../../api/Jobapi";
 import { DragDropContext } from "react-beautiful-dnd";
+import { calaulateProjectDuration } from "../../payments/utils/Helper";
 
 function AcceptedClientPage() {
+  const [projectRemainingTime, setProjectRemainingTime] = useState("");
   const nav = useNavigate();
   const { id } = useParams();
   const [clientDetails, setClientDetails] = useState({});
@@ -25,7 +27,12 @@ function AcceptedClientPage() {
       if (getClient.data) {
         setClientDetails(getClient.data.user);
       }
-      console.log(job.data.details);
+
+      setProjectRemainingTime(
+        calaulateProjectDuration(job.data.details.deadlineDate)
+      );
+
+      // console.log(remainingTime);
     };
     fetchData();
   }, [id]);
@@ -71,25 +78,24 @@ function AcceptedClientPage() {
 
             <container className={css.profileContainer}>
               <div className={css.informationDiv}>
-                <div className={css.topRightDiv}></div>
                 <header className={css.headDiv}>
                   <article>{clientDetails.jobTitle}</article>
                 </header>
                 <container className={css.duoDiv}>
-                  <FaUser className={css.logo} />
-                  <article>{clientDetails.name}</article>
+                  <article>Project Duration</article>
+                  <span>{selectedJobDetails?.projectDuration}</span>
                 </container>
                 <container className={css.duoDiv}>
-                  <FaLocationArrow className={css.logo} />
-                  <article>{clientDetails.address}</article>
+                  <article>Total Salary</article>
+                  <article>{selectedJobDetails?.salary}</article>
                 </container>
                 <container className={css.duoDiv}>
-                  <IoMailOutline className={css.logo} />
-                  <article>{clientDetails.email}</article>
+                  <article>Salary Frequency</article>
+                  <article>{selectedJobDetails?.salaryStatus}</article>
                 </container>
                 <container className={css.duoDiv}>
-                  <FaPhone className={css.logo} />
-                  <article>{clientDetails.contact}</article>
+                  <article>Remaining Time</article>
+                  <article>{projectRemainingTime}</article>
                 </container>
               </div>
             </container>

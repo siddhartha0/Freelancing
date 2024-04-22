@@ -53,10 +53,17 @@ controller.post("/login", async (req, res) => {
             "freelancing"
           );
 
+          const userDetailsToSend = await authTable
+            .findOne({
+              name: userDetails.name,
+            })
+            .select("-password");
+
           res.status(200).json({
             msg: "User has been logged in successfully.",
             token: accessToken,
             userId: searchUser._id.toString(),
+            user: userDetailsToSend,
           });
         } else {
           res.json({ msg: "You have entered incorrect password" });

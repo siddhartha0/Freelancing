@@ -6,6 +6,8 @@ import { useCookies } from "react-cookie";
 import toast from "react-hot-toast";
 import { RotatingLines } from "react-loader-spinner";
 import AuthApi from "../api/AuthApi";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../slices/UserSlice";
 
 function Login({ setauthShow }) {
   const [alertPwd, setalertPwd] = useState(false);
@@ -22,6 +24,8 @@ function Login({ setauthShow }) {
     setUserDetails({ ...userDetails, [e.target.name]: value });
   };
 
+  const dispatch = useDispatch();
+
   const logIn = async (e) => {
     e.preventDefault();
     setloadingalert(true);
@@ -30,12 +34,13 @@ function Login({ setauthShow }) {
 
       if (response.data.msg === "User has been logged in successfully.") {
         const token = response.data.token;
+
+        dispatch(setCredentials(response.data.user));
         setCookies("token", token);
         localStorage.setItem("userId", JSON.stringify(response.data.userId));
         setloadingalert(false);
         setauthShow(false);
       } else {
-        console.log(response.data);
         toast.error(response.data.msg);
       }
     }
