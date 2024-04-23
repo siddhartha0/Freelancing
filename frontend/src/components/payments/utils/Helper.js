@@ -1,4 +1,5 @@
 import { formatDistanceToNow } from "date-fns";
+import { useMemo } from "react";
 
 export const moneyToBeProviedToClients = (totalSalary) => {
   const calculateFivePercentOff = (totalSalary / 100) * 5;
@@ -45,8 +46,6 @@ const findPercent = (userSkills, requiredSkills) => {
   const getTotalRequiredSkillsLength = removeDuplicateFromRequiredSkills.length;
 
   console.log(getTotalRequiredSkillsLength);
-
-  const totalUserSkillsLength = removeDuplicateFromuserSkills.length;
 
   let value = 0;
 
