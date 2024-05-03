@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const Base_api = "http://localhost:3333/job/";
-const paypal_api = "http://localhost:3333/config/paypal";
+const Base_api = "https://dhandamela-server.vercel.app/job/";
+const paypal_api = "https://dhandamela-server.vercel.app/config/paypal";
 
 class Jobapi {
   postJob(jobDetails) {

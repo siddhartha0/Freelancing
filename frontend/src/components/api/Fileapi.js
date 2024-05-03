@@ -1,5 +1,5 @@
 import axios from "axios";
-const File_Url = "http://localhost:3333/upload";
+const File_Url = "https://dhandamela-server.vercel.app/upload";
 
 class Fileapi {
   uploadDocs(file) {

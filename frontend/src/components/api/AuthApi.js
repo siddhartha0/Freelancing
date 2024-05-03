@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const authApi = "http://localhost:3333/auth/";
+const authApi = "https://dhandamela-server.vercel.app/auth/";
 
 class AuthApi {
   register(userDetails) {
