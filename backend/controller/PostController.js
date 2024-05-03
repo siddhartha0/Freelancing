@@ -11,7 +11,8 @@ router.post("/postJob", async (client, server) => {
 
     if (checkUser) {
       const toSave = new postModel(jobDetails);
-      await toSave.save();
+      const job = await toSave.save();
+      console.log(job);
       server
         .status(200)
         .json({ msg: "Your Job has been posted", details: jobDetails });

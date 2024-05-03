@@ -1,5 +1,4 @@
 import { formatDistanceToNow } from "date-fns";
-import { useMemo } from "react";
 
 export const moneyToBeProviedToClients = (totalSalary) => {
   const calculateFivePercentOff = (totalSalary / 100) * 5;
@@ -20,9 +19,10 @@ export const calculateMonthly = (totalSalary, totalDuration) => {
 };
 
 export const recommend = (userSkills, jobs) => {
-  const jobSkill = jobs.map((job) => job.skills.map((skill) => skill.skills));
-  const filter = jobSkill.map((skill, i) => skill);
+  console.log(userSkills);
+  const jobSkill = jobs.map((job) => job.skills.map((skill) => skill));
 
+  const filter = jobSkill.map((skill, i) => skill.map((skill) => skill.skills));
   let percentMatch = [];
 
   for (let i = 0; i < filter.length; i++) {
@@ -36,16 +36,11 @@ export const recommend = (userSkills, jobs) => {
 };
 
 const findPercent = (userSkills, requiredSkills) => {
-  console.log(requiredSkills);
-  console.log(userSkills);
-
   const removeDuplicateFromuserSkills = [...new Set(userSkills)];
 
   const removeDuplicateFromRequiredSkills = [...new Set(requiredSkills)];
 
   const getTotalRequiredSkillsLength = removeDuplicateFromRequiredSkills.length;
-
-  console.log(getTotalRequiredSkillsLength);
 
   let value = 0;
 

@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { getJobsPost } from "../../slices/PostSlice";
 import { getUser } from "../../slices/UserSlice";
 import { recommend } from "../../payments/utils/Helper";
+import parse from "html-react-parser";
 
 function ShowJob({ searchInput }) {
   const job = useSelector(getJobsPost);
@@ -44,7 +45,10 @@ function ShowJob({ searchInput }) {
   };
 
   const recomendToUser = () => {
-    const userSkills = user.skill[0].skill;
+    console.log(user);
+
+    const userSkills = user.skill.map((skill) => skill);
+
     const getJob = job.jobs.filter((job) => !job.acceptedClientId);
 
     const jobs = recommend(userSkills, getJob);
@@ -97,7 +101,6 @@ function ShowJob({ searchInput }) {
               >
                 <div className={css.leftResult}>
                   <header>{jobs.postTitle}</header>
-                  <p>{jobs.postDescription.substring(0, 50) + "..."}</p>
 
                   <div className={css.skillDiv}>
                     {jobs.skills.map((skill, i) => (

@@ -16,7 +16,6 @@ const table = new mongoose.Schema({
   },
   salaryStatus: {
     type: String,
-    require: true,
   },
   ownerId: {
     type: String,

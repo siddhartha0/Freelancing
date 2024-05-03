@@ -6,12 +6,14 @@ import { useNavigate } from "react-router";
 import { BiBell, BiSolidExit, BiSolidUser } from "react-icons/bi";
 import { MdOutlineMenu } from "react-icons/md";
 import { useCookies } from "react-cookie";
+import { useDispatch } from "react-redux";
+import { removeCredentials } from "../slices/UserSlice";
 
 export default function Header({ authShow, setauthShow }) {
   const nav = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const [useCookie, _setCookie] = useCookies(["token"]);
-  console.log(useCookie);
+  const dispatch = useDispatch();
 
   const getUserDetails = localStorage.getItem("userId");
 
@@ -19,6 +21,7 @@ export default function Header({ authShow, setauthShow }) {
     _setCookie("token", null);
     localStorage.removeItem("userId");
     setShowMenu(false);
+    dispatch(removeCredentials());
   };
 
   return (
@@ -30,7 +33,7 @@ export default function Header({ authShow, setauthShow }) {
       <div className={css.middle}>
         <ul>
           <li>Home</li>
-          <li>Services</li>
+          <li onClick={() => nav("/demo")}>Services</li>
           <li>About us</li>
         </ul>
       </div>

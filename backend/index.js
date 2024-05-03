@@ -31,6 +31,7 @@ mongoose.connect(process.env.MONGO_USER, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+
 app.listen(process.env.PORT, () => {
   console.log("Server has started");
 });

@@ -20,7 +20,6 @@ import Projects from "./components/payments/Projects/Projects";
 
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
-console.log("Main Lobby");
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 Store.dispatch(fetchJobs());

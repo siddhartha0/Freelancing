@@ -7,6 +7,7 @@ import Fileapi from "../../api/Fileapi";
 import applicationapi from "../../api/applicationapi";
 import Userapi from "../../api/Userapi";
 import { Toaster, toast } from "react-hot-toast";
+import parse from "html-react-parser";
 
 function JobDetails() {
   const nav = useNavigate();
@@ -20,10 +21,14 @@ function JobDetails() {
   const [userId, setuserId] = useState("");
   const [alreadyapplied, setalreadyapplied] = useState(false);
   const [ownerDetails, setOwnerDetails] = useState();
+  const [displayDescription, setDisplayDescription] = useState();
 
   useEffect(() => {
     const fetchJobDetails = async () => {
       const result = await Jobapi.searchingJob(jobId.id);
+      const parsedValue = parse(result.data.details.postDescription);
+      console.log(result.data.details);
+      setDisplayDescription(parsedValue);
       setPostDetails(result.data.details);
       const getSkill = result.data.details.skills.map((e) => e.skills);
       setSkills(getSkill);
@@ -128,7 +133,7 @@ function JobDetails() {
         <div className={css.taskDiv}>
           <header>Job Tasks & Responsibities</header>
 
-          <article>{postDetails.postDescription}</article>
+          <article>{displayDescription}</article>
         </div>
 
         <div className={css.skillDiv}>

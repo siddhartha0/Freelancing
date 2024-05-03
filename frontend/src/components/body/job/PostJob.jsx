@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import css from "./PostJob.module.css";
 import { PiPlusCircle } from "react-icons/pi";
 import { IoChevronBack } from "react-icons/io5";
@@ -7,26 +7,25 @@ import Jobapi from "../../api/Jobapi";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Toaster, toast } from "react-hot-toast";
+import "react-datepicker/dist/react-datepicker.css";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import { formatDistanceToNow } from "date-fns";
+import { parseISO } from "date-fns";
 
 function PostJob() {
   const nav = useNavigate();
+  const [date, setDate] = useState(new Date());
 
   const [inputField, setInputField] = useState({
     postTitle: "",
     salary: "",
-    postDescription: "",
     ownerId: "",
     salaryStatus: "",
-    deadlineDate: "",
     newToDos: [],
     finishedToDos: [],
   });
   const [skills, setSkill] = useState([{ skill: "" }]);
-
-  useEffect(() => {
-    const fetchData = () => {};
-    fetchData();
-  }, []);
 
   const addSkills = () => {
     setSkill([...skills, { skill: "" }]);
@@ -37,6 +36,8 @@ function PostJob() {
     setInputField({ ...inputField, [e.target.name]: name });
   };
 
+  const [getContent, setContent] = useState("");
+
   const handleSkillChange = (e, i) => {
     const { value, name } = e.target;
     const skillList = [...skills];
@@ -44,12 +45,44 @@ function PostJob() {
     setSkill(skillList);
   };
 
+  const modules = {
+    toolbar: [
+      [{ font: [] }],
+      [{ size: ["small", false, "large", "huge"] }],
+      ["bold", "italic", "underline"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      [{ align: [] }],
+      [{ color: [] }, { background: [] }],
+      ["link", "image"],
+      ["code-block"],
+      ["clean"],
+    ],
+  };
+
+  const formats = [
+    "font",
+    "size",
+    "bold",
+    "italic",
+    "underline",
+    "list",
+    "bullet",
+    "align",
+    "color",
+    "background",
+    "link",
+    "image",
+    "code-block",
+  ];
+
   const postJob = async () => {
     const ownerId = JSON.parse(localStorage.getItem("userId"));
     if (ownerId) {
-      if (inputField.postTitle && inputField.postDescription) {
+      if (inputField.postTitle && getContent) {
         const toPost = {
           ...inputField,
+          postDescription: getContent.toString(),
+          deadlineDate: date.toISOString().slice(0, 10),
           ownerId: ownerId,
           skills: skills,
         };
@@ -60,8 +93,9 @@ function PostJob() {
           deadlineDate: "",
           postTitle: "",
           salary: "",
-          salaryStatus: "",
         });
+        setContent("");
+        setDate("");
       } else {
         toast.error("Please fill the necessary fields");
       }
@@ -90,73 +124,29 @@ function PostJob() {
           />
 
           <header>Deadline Date</header>
-          <input
-            type="text"
-            className={css.input}
-            placeholder="mm/dd/yyyy"
-            name="deadlineDate"
-            value={inputField.deadlineDate}
-            onChange={(e) => handleChange(e)}
-          />
+          <div>
+            <DatePicker
+              selected={date}
+              onChange={(select) => setDate(select)}
+              className={css.date}
+            />
+          </div>
         </div>
 
         <div className={css.descriptionDiv}>
           <header>Job Description</header>
-          <textarea
-            name="postDescription"
-            id=""
-            cols="30"
-            rows="10"
-            className={css.input}
-            value={inputField.postDescription}
-            onChange={(e) => handleChange(e)}
-          ></textarea>
+          <ReactQuill
+            className={css.editor}
+            theme="snow"
+            value={getContent}
+            onChange={(value) => setContent(value.toString())}
+            modules={modules}
+            formats={formats}
+          />
         </div>
 
         <div className={css.salaryDiv}>
           <header>Salary</header>
-
-          <div className={css.radioDiv}>
-            <input
-              type="radio"
-              name="salary"
-              value="completed"
-              onChange={(e) =>
-                setInputField({
-                  ...inputField,
-                  salaryStatus: e.target.value,
-                })
-              }
-            />
-            <label>Project Completion</label>
-            <input
-              type="radio"
-              name="salary"
-              value="Weekly"
-              onChange={(e) =>
-                setInputField({
-                  ...inputField,
-                  salaryStatus: e.target.value,
-                })
-              }
-            />
-
-            <label htmlFor="">Weekly</label>
-
-            <input
-              type="radio"
-              name="salary"
-              value="Monthly"
-              placeholder="Monthly"
-              onChange={(e) =>
-                setInputField({
-                  ...inputField,
-                  salaryStatus: e.target.value,
-                })
-              }
-            />
-            <label htmlFor="">Monthly</label>
-          </div>
 
           <input
             type="text"

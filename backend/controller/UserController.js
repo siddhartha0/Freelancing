@@ -54,6 +54,7 @@ controller.put("/update/:id", async (req, res) => {
         ).toString();
         const updatedUser = { ...newUserDetails, password: hashedPwd };
         await authTable.findByIdAndUpdate(req.params.id, updatedUser);
+
         res.status(200).json({ msg: "User has been updated", newUserDetails });
       } else {
         await authTable.findByIdAndUpdate(req.params.id, newUserDetails);
