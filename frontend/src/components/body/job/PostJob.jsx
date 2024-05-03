@@ -10,8 +10,6 @@ import { Toaster, toast } from "react-hot-toast";
 import "react-datepicker/dist/react-datepicker.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { formatDistanceToNow } from "date-fns";
-import { parseISO } from "date-fns";
 
 function PostJob() {
   const nav = useNavigate();
