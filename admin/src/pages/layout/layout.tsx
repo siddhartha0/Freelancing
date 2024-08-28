@@ -17,7 +17,7 @@ export const Layout = React.memo(() => {
       </section>
 
       <section
-        className={classnames("flex ml-52 flex-col p-4 ", {
+        className={classnames("flex ml-52 flex-col p-4 w-full ", {
           "-ml-2": context?.sidebarStatus == false,
         })}
       >
