@@ -125,6 +125,14 @@ export default {
         "50%": { transform: "translateY(-10px)" },
         "100%": { transform: "translateY(0)" },
       },
+      "slide-in-left": {
+        "0%": { transform: "translateX(-20px)" },
+        "100%": { transform: "translateX(0)" },
+      },
+      "slide-in-right": {
+        "0%": { transform: "translateX(20px)" },
+        "100%": { transform: "translateX(0)" },
+      },
     },
     animation: {
       "fade-in": "fade-in 0.6s ease-in both",
@@ -136,6 +144,8 @@ export default {
       scale: "scale .8s ease-in-out both",
       pulsing: "pulsing 1s ease-in-out both",
       float: "float 1s ease-in-out both",
+      "slide-in-left": "slide-in-left 0.6s ease-out both",
+      "slide-in-right": "slide-in-right 0.6s ease-out both",
     },
     extend: {},
   },

@@ -2,9 +2,11 @@ import { Menu, User } from "react-feather";
 import { Icon, Text } from "../../units";
 import { useLayoutContent } from "../../context";
 import React from "react";
+import { useLocation } from "react-router-dom";
 
 export const Navbar = React.memo(() => {
   const context = useLayoutContent();
+  const location = useLocation();
 
   return (
     <main className="flex justify-between ">
@@ -15,7 +17,9 @@ export const Navbar = React.memo(() => {
           iconSize={24}
           textColor="#40189D"
         />
-        <Text size="header">Dashboard</Text>
+        <Text size="header" classNAME="capitalize">
+          {location.pathname == "/" ? "Dashboard" : location.pathname.slice(1)}
+        </Text>
       </section>
 
       <section className="flex place-items-center gap-3 ">

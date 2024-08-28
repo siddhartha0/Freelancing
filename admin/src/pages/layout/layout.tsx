@@ -6,10 +6,11 @@ import React from "react";
 
 export const Layout = React.memo(() => {
   const context = useLayoutContent();
+
   return (
     <main className="flex bg-primary">
       <section
-        className={classnames("fixed   top-0 animate-fade-in", {
+        className={classnames("fixed   bg-brand top-0 animate-fade-in", {
           hidden: !context?.sidebarStatus,
         })}
       >
@@ -17,9 +18,12 @@ export const Layout = React.memo(() => {
       </section>
 
       <section
-        className={classnames("flex ml-52 flex-col p-4 w-full ", {
-          "-ml-2": context?.sidebarStatus == false,
-        })}
+        className={classnames(
+          "flex ml-52 flex-col min-h-screen p-4 w-full gap-5 ",
+          {
+            "-ml-0": context?.sidebarStatus == false,
+          }
+        )}
       >
         <Navbar />
         <Outlet />
