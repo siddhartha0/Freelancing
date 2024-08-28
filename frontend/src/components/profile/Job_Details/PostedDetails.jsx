@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import css from "./Posted.module.css";
 import ApplicantsPage from "./ApplicantsPage";
+import parse from "html-react-parser";
 
 export default function PostedDetails({ selectedJobDetails }) {
   const [showapplicants, setShowapplicants] = useState(false);
@@ -17,15 +18,15 @@ export default function PostedDetails({ selectedJobDetails }) {
         </div>
         <header>Skills Needed</header>
         <div className={css.skillDiv}>
-          {selectedJobDetails.skills.map((skill) => (
-            <article>{skill.skills}</article>
+          {selectedJobDetails.skills.map((skill, i) => (
+            <article id={i}>{skill.skills}</article>
           ))}
           {/* <article>Css</article> */}
         </div>
 
         <header>Jobs Description</header>
         <div className={css.descriptionDiv}>
-          <article>{selectedJobDetails.postDescription}</article>
+          <article>{parse(selectedJobDetails.postDescription)}</article>
         </div>
 
         <div className={css.btnDiv}>

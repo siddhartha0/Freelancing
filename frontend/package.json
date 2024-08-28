@@ -12,6 +12,7 @@
     "axios": "^1.6.0",
     "boxicons": "^2.1.4",
     "cookie-parser": "^1.4.6",
+    "crypto-js": "^4.2.0",
     "date-fns": "^3.3.1",
     "html-react-parser": "^5.1.10",
     "jsonwebtoken": "^9.0.2",

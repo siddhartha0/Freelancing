@@ -5,7 +5,7 @@ import ServiceFeatures from "./ServiceFeatures";
 
 export default function Services() {
   return (
-    <div className={css.service}>
+    <div className={css.service} id="service">
       <div className={css.boxDiv}>
         <div className={css.firstBox}>
           <RiAccountBoxFill className={css.icon} />

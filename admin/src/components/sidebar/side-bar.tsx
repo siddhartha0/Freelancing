@@ -18,7 +18,7 @@ export const Sidebar = React.memo(() => {
             path={nav.path}
             key={nav.id + nav.title}
             className={classnames("flex  place-items-center gap-4 mr-2 pr-4", {
-              "bg-primary text-purple-800 rounded-s-full  flex items-center w-52 pl-4 pt-4 pb-4 animate-slide-in-right  ":
+              "bg-primary text-purple-800 rounded-s-full  flex items-center w-52 pl-4 pt-4 pb-4  animate-slide-in-right  ":
                 context?.currentPath === nav.title,
             })}
             onClick={() => {

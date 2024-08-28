@@ -1,5 +1,5 @@
 import axios from "axios";
-const Base_api = "https://dhandamela-server.vercel.app/user";
+const Base_api = "http://localhost:3333/user";
 
 class Userapi {
   getallUser() {

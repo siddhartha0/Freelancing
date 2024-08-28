@@ -60,6 +60,10 @@ const table = new mongoose.Schema({
     type: String,
     default: new Date().toISOString(),
   },
+  task: {
+    type: String,
+  },
+  taskCompletion: [],
 });
 
 const PostModel = mongoose.model("JobPost", table);

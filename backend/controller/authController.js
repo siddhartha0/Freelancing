@@ -2,7 +2,6 @@ const express = require("express");
 const authTable = require("../model/authModel");
 const encrypt = require("bcrypt");
 const token = require("jsonwebtoken");
-const cookie = require("cookie-parser");
 
 const controller = express.Router();
 controller.post("/register", async (req, res) => {

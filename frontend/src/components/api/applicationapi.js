@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const appUrl = "https://dhandamela-server.vercel.app/application";
+const appUrl = "http://localhost:3333/application";
 class applicationapi {
   sendapplication(file) {
     return axios.post(appUrl + "/sendCv", file);

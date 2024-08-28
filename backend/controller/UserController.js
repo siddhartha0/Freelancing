@@ -1,9 +1,7 @@
 const express = require("express");
 const authTable = require("../model/authModel");
-
 const controller = express.Router();
 const bcrypt = require("bcrypt");
-const ObjectId = require("mongodb").ObjectID;
 
 controller.get("/getall", async (req, res) => {
   try {

@@ -10,7 +10,6 @@ import {
 import profile from "../../../assets/RightTheme.png";
 import { useNavigate } from "react-router";
 import EditProfile from "./EditProfile";
-import Userapi from "../../api/Userapi";
 import { useSelector } from "react-redux";
 import { getUser } from "../../slices/UserSlice";
 
@@ -18,16 +17,16 @@ function Profile() {
   const user = useSelector(getUser);
   const [UserSkills, setUserSkills] = useState([]);
   const [userProject, setuserProject] = useState([]);
-  console.log(user);
 
   useEffect(() => {
     const fetchData = async () => {
       setUserSkills(user?.skill);
-
       setuserProject(user?.project);
     };
     fetchData();
   }, [user]);
+
+  console.log(user);
 
   const nav = useNavigate();
   const [editProps, setEditProps] = useState(false);

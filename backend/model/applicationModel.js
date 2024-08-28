@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const table = new mongoose.Schema({
   userId: {
     type: String,
-
     required: true,
   },
   name: {

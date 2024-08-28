@@ -10,7 +10,7 @@ import { useNavigate } from "react-router";
 export default function Body() {
   const nav = useNavigate();
   return (
-    <div className={css.body}>
+    <div className={css.body} id="home">
       <div className={css.left}>
         <p className={css.leftSentence}>
           Find Your Dream <span>Job</span>

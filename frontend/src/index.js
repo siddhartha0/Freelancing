@@ -19,6 +19,8 @@ import ClientDetails from "./components/payments/ClientDetails/ClientDetails";
 import Projects from "./components/payments/Projects/Projects";
 
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import ViewTask from "./components/profile/Job_Details/ViewTask";
+import PaymentSuccess from "./components/payments/Projects/PaymentSuccess";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -29,19 +31,17 @@ root.render(
     <PayPalScriptProvider deferLoading={false}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<App />}></Route>
+          <Route path="/" element={<App />}></Route>{" "}
           <Route path="/searchJob" element={<SearchJob />}></Route>
           <Route path="/post" element={<PostJob />}></Route>
           <Route path="/jobDetails/:id" element={<JobDetails />}></Route>
-
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/notify" element={<Notification />}></Route>
           <Route path="/clientProfile/:id" element={<ClientProfile />} />
           <Route path="/viewPdf/:pdf" element={<ViewPdf />} />
+          <Route path="/viewTask/:pdf" element={<ViewTask />} />
           <Route path="/acceptedClient/:id" element={<AcceptedClientPage />} />
-
           <Route path="/pendingJob/:id" element={<ClientPendingDetails />} />
-
           <Route path="/acceptapplication/:id" element={<Payment />}>
             <Route index element={<ClientDetails />} />
             <Route
@@ -49,6 +49,7 @@ root.render(
               element={<Projects />}
             />
           </Route>
+          <Route path="/success" element={<PaymentSuccess />} />
         </Routes>
       </BrowserRouter>
     </PayPalScriptProvider>

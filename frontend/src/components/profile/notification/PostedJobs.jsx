@@ -49,11 +49,6 @@ function PostedJobs({
           <div className={css.postBody} key={jobs._id}>
             <div className={css.userDetails}>
               <header>{jobs.postTitle}</header>
-              <div className={css.duoDiv}>
-                <article>
-                  {jobs.postDescription.substring(0, 25) + "..."}
-                </article>
-              </div>
             </div>
             <div className={css.skillDiv}>
               {jobs.skills.map((skill, i) => (

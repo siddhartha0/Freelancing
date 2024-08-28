@@ -347,7 +347,15 @@
 
 .postDetailDiv {
   display: flex;
-  position: absolute;
+  position: "absolute";
+  top: 50%;
+  left: 50%;
+  transform: "translate(-50%, -50%)";
+  min-width: 850;
+  max-height: 580;
+  /* background-color: "#fff"; */
+  box-shadow: 60;
+  outline: "none";
 }
 .postDetailDiv > .icon {
   font-size: 30px;

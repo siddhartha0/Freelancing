@@ -1,0 +1,58 @@
+.mainDiv {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.bodyDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 2rem 0rem 0rem 2rem;
+}
+
+.headerDiv {
+  display: flex;
+  gap: 1rem;
+  margin: -1rem 1rem 0rem 0rem;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.textBtn {
+  color: black;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.noneDiv {
+  margin: 2rem 0rem 0rem 2rem;
+}
+
+.taskDiv {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.contentDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: #fff;
+  padding: 1rem;
+  /* align-items: center; */
+}
+.leftDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.rightDiv {
+  display: flex;
+  gap: 1rem;
+}

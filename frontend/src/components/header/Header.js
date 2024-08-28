@@ -31,11 +31,9 @@ export default function Header({ authShow, setauthShow }) {
       </div>
 
       <div className={css.middle}>
-        <ul>
-          <li>Home</li>
-          <li onClick={() => nav("/demo")}>Services</li>
-          <li>About us</li>
-        </ul>
+        <a href="#home">Home</a>
+        <a href="#service">Services</a>
+        <a href="#about">About us</a>
       </div>
 
       <div className={css.right}>

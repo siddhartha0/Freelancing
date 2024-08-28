@@ -22,12 +22,14 @@ function JobDetails() {
   const [alreadyapplied, setalreadyapplied] = useState(false);
   const [ownerDetails, setOwnerDetails] = useState();
   const [displayDescription, setDisplayDescription] = useState();
+  const [task, setTask] = useState();
 
   useEffect(() => {
     const fetchJobDetails = async () => {
       const result = await Jobapi.searchingJob(jobId.id);
+      const taskGivenByCompany = result.data.details.task;
+      setTask(taskGivenByCompany);
       const parsedValue = parse(result.data.details.postDescription);
-      console.log(result.data.details);
       setDisplayDescription(parsedValue);
       setPostDetails(result.data.details);
       const getSkill = result.data.details.skills.map((e) => e.skills);
@@ -100,7 +102,12 @@ function JobDetails() {
 
       <div className={css.statusDiv}>
         {alreadyapplied && (
-          <article>You have already submitted your proposal</article>
+          <article>
+            You have already submitted your proposal.
+            <article>
+              Please check in your notification section to find the given task.
+            </article>
+          </article>
         )}
       </div>
       <div className={css.topDiv}>

@@ -9,6 +9,7 @@ import Jobsapplied from "./Jobsapplied";
 import PostedJobs from "./PostedJobs";
 import CompletedJobs from "./CompletedJobs";
 import PendingJobs from "./PendingJobs";
+import TestByCompany from "./TestByCompany";
 
 function Notification() {
   const nav = useNavigate();
@@ -38,6 +39,10 @@ function Notification() {
       id: 4,
       header: "Completed Jobs",
     },
+    {
+      id: 5,
+      header: "Test",
+    },
   ];
 
   useEffect(() => {
@@ -64,7 +69,7 @@ function Notification() {
       );
 
       const you = jobs.data.JobPost.filter((job, i) => yourJob[i] === true);
-
+      console.log(you);
       setyourappliedJobs(you);
 
       setYourPostedJobs(yourPostedJobs);
@@ -76,9 +81,7 @@ function Notification() {
     <div className={css.container}>
       <div
         className={css.bodyDiv}
-        style={
-          seeDetails ? { filter: "blur(1.2rem)", overflowY: "hidden" } : {}
-        }
+        style={seeDetails ? { filter: "blur(1.2rem)", display: "none" } : {}}
       >
         <div className={css.headerDiv}>
           <MdArrowBackIos className={css.icons} onClick={() => nav("/")} />
@@ -125,6 +128,9 @@ function Notification() {
           {getactiveHeader === 3 && <PendingJobs assignedJob={assignedJob} />}
           {getactiveHeader === 4 && (
             <CompletedJobs finishedProjects={finishedProjects} />
+          )}
+          {getactiveHeader === 5 && (
+            <TestByCompany yourappliedJobs={yourappliedJobs} userID={userID} />
           )}
         </div>
       </div>

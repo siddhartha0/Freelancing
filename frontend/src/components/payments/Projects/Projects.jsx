@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import css from "./Projects.module.css";
-import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import { useParams } from "react-router-dom";
 import applicationapi from "../../api/applicationapi";
 import Jobapi from "../../api/Jobapi";
@@ -11,6 +10,10 @@ import {
   moneyToBeProviedToClients,
 } from "../utils/Helper";
 import { useMemo } from "react";
+import Pay from "./Pay";
+import toast from "react-hot-toast";
+import Sewa from "./Sewa";
+import Khalti from "./Khalti";
 
 function Projects() {
   const [getSalaryFre, setSalaryFre] = useState("weekly");
@@ -19,7 +22,6 @@ function Projects() {
   const { id } = useParams();
   const [userDetails, setUserDetails] = useState();
   const todayDate = new Date();
-  const [payPalDispatch] = usePayPalScriptReducer();
   const [projectDetails, setProjectDetails] = useState();
 
   const [totalSalary, setTotalSalary] = useState();
@@ -37,49 +39,6 @@ function Projects() {
   const salaryPerWeek = useMemo(() => {
     return calculateWeekly(salaryToBeProvided, projectDuration);
   }, [salaryToBeProvided, projectDuration]);
-
-  const acceptApplication = async () => {
-    const acceptClient = {
-      ...projectDetails,
-      acceptedClientId: userDetails,
-      projectTaken: true,
-      salaryStatus: getSalaryFre,
-      salary: totalSalary,
-      clientRecievedSalary: salaryToBeProvided,
-      moneySentPerSalaryStatus:
-        getSalaryFre === "weekly"
-          ? salaryPerWeek
-          : getSalaryFre === "monthly"
-          ? salaryPerMonth
-          : salaryToBeProvided,
-      projectDuration: projectDuration,
-    };
-
-    const res = await Jobapi.updateJobDetails(acceptClient);
-    console.log(res);
-  };
-
-  const onapprove = (data, action) => {
-    action.order.capture().then(async function (details) {
-      acceptApplication();
-    });
-  };
-
-  const createOrder = (data, action) => {
-    return action.order
-      .create({
-        purchase_units: [
-          {
-            amount: {
-              value: totalSalary,
-            },
-          },
-        ],
-      })
-      .then((orderId) => {
-        return orderId;
-      });
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -103,24 +62,7 @@ function Projects() {
     };
 
     fetchData();
-  }, [id]);
-
-  useEffect(() => {
-    const loadScript = async () => {
-      payPalDispatch({
-        type: "resetOptions",
-        value: {
-          "client-id": clientID,
-          currency: "USD",
-        },
-      });
-      payPalDispatch({
-        type: "setLoadingStatus",
-        value: "pending",
-      });
-    };
-    loadScript();
-  }, [clientID, payPalDispatch]);
+  }, []);
 
   return (
     <div className={css.wholeDiv}>
@@ -224,15 +166,20 @@ function Projects() {
         </div>
       </div>
       <div className={css.btnDiv}>
-        <PayPalButtons
-          className={css.payBtns}
-          style={{
-            shape: "rect",
-            layout: "vertical",
-          }}
-          onApprove={onapprove}
-          createOrder={createOrder}
+        <Pay
+          clientId={clientID}
+          totalSalary={totalSalary}
+          projectDetails={projectDetails}
+          userDetails={userDetails}
+          getSalaryFre={getSalaryFre}
+          salaryToBeProvided={salaryToBeProvided}
+          salaryPerMonth={salaryPerMonth}
+          salaryPerWeek={salaryPerWeek}
+          projectDuration={projectDuration}
         />
+
+        <Sewa total={totalSalary} />
+        <Khalti total={totalSalary} />
       </div>
     </div>
   );

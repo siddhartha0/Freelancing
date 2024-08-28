@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
 import css from "./Notification.module.css";
+import { useNavigate } from "react-router";
 
 function Jobsapplied({ yourappliedJobs, userID }) {
   useEffect(() => {
     yourappliedJobs.map((job) => console.log(job.acceptedClientId));
   }, [yourappliedJobs, userID]);
+
+  const nav = useNavigate();
   // console.log(userID);
   return (
     <div className={css.mainDiv}>
@@ -50,7 +53,12 @@ function Jobsapplied({ yourappliedJobs, userID }) {
 
               <div className={css.actionDiv}>
                 <button className={css.btn}>Delete</button>
-                <button className={css.btn}>Contact</button>
+                <button
+                  className={css.btn}
+                  onClick={() => nav(`/jobDetails/${jobs?._id}`)}
+                >
+                  Details
+                </button>
               </div>
             </div>
           ))

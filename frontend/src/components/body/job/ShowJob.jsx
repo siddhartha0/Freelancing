@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 import { getJobsPost } from "../../slices/PostSlice";
 import { getUser } from "../../slices/UserSlice";
 import { recommend } from "../../payments/utils/Helper";
-import parse from "html-react-parser";
 
 function ShowJob({ searchInput }) {
   const job = useSelector(getJobsPost);
@@ -25,15 +24,18 @@ function ShowJob({ searchInput }) {
     }
   };
   useEffect(() => {
-    const getJob = job.jobs.filter((job) => !job.acceptedClientId);
-    setShowJobs(getJob);
+    console.log(job);
+    if (job.jobs.length > 0) {
+      const getJob = job.jobs?.filter((job) => !job.acceptedClientId);
+      setShowJobs(getJob);
 
-    document.addEventListener("mousedown", clickOutSide);
-    return () => document.removeEventListener("mousedown", clickOutSide);
+      document.addEventListener("mousedown", clickOutSide);
+      return () => document.removeEventListener("mousedown", clickOutSide);
+    }
   }, [job]);
 
   const filterByLatestJobs = () => {
-    const getJob = job.jobs.filter((job) => !job.acceptedClientId);
+    const getJob = job?.jobs?.filter((job) => !job.acceptedClientId);
     setShowJobs(getJob);
     setStatus("Recently posted");
   };
@@ -88,37 +90,37 @@ function ShowJob({ searchInput }) {
       </article>
 
       <div className={css.leftDiv}>
-        {showJobs?.length >= 1 ? (
+        {showJobs?.length >= 0 ? (
           showJobs
-            .filter((job) =>
-              job.postTitle.toLowerCase().includes(searchInput.toLowerCase())
+            ?.filter((job) =>
+              job?.postTitle.toLowerCase().includes(searchInput.toLowerCase())
             )
             .map((jobs, i) => (
               <div
                 className={css.resultDiv}
                 key={jobs._id}
-                onClick={() => nav(`/jobDetails/${jobs._id}`)}
+                onClick={() => nav(`/jobDetails/${jobs?._id}`)}
               >
                 <div className={css.leftResult}>
                   <header>{jobs.postTitle}</header>
 
                   <div className={css.skillDiv}>
-                    {jobs.skills.map((skill, i) => (
+                    {jobs?.skills.map((skill, i) => (
                       <span key={i}>{skill.skills}</span>
                     ))}
                   </div>
 
                   <div>
-                    <CalculateTime time={jobs.postedDate} />
+                    <CalculateTime time={jobs?.postedDate} />
                   </div>
                 </div>
 
                 <div className={css.rightResult}>
                   <span>Salary</span>
                   <p>
-                    $ <span>{jobs.salary}</span>
+                    $ <span>{jobs?.salary}</span>
                   </p>
-                  <span>{jobs.salaryStatus}</span>
+                  <span>{jobs?.salaryStatus}</span>
                 </div>
               </div>
             ))

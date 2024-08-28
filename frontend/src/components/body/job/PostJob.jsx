@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useCallback, useRef, useState } from "react";
 import css from "./PostJob.module.css";
 import { PiPlusCircle } from "react-icons/pi";
 import { IoChevronBack } from "react-icons/io5";
@@ -10,8 +10,9 @@ import { Toaster, toast } from "react-hot-toast";
 import "react-datepicker/dist/react-datepicker.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import Fileapi from "../../api/Fileapi";
 
-function PostJob() {
+const PostJob = memo(() => {
   const nav = useNavigate();
   const [date, setDate] = useState(new Date());
 
@@ -72,28 +73,46 @@ function PostJob() {
     "image",
     "code-block",
   ];
+  const [taskDetails, setTaskDetails] = useState();
+  const taskRef = useRef();
+
+  const changeCv = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      const docs = e.target.files[0];
+      setTaskDetails(docs);
+    }
+  };
 
   const postJob = async () => {
     const ownerId = JSON.parse(localStorage.getItem("userId"));
     if (ownerId) {
       if (inputField.postTitle && getContent) {
-        const toPost = {
-          ...inputField,
-          postDescription: getContent.toString(),
-          deadlineDate: date.toISOString().slice(0, 10),
-          ownerId: ownerId,
-          skills: skills,
-        };
-        await Jobapi.postJob(toPost);
-        toast.success("Job has been posted");
-        setInputField({
-          postDescription: "",
-          deadlineDate: "",
-          postTitle: "",
-          salary: "",
-        });
-        setContent("");
-        setDate("");
+        if (taskDetails) {
+          const data = new FormData();
+          const name = Date.now() + taskDetails.name;
+          data.append("name", name);
+          data.append("file", taskDetails);
+          const toPost = {
+            ...inputField,
+            postDescription: getContent.toString(),
+            deadlineDate: date.toISOString().slice(0, 10),
+            ownerId: ownerId,
+            skills: skills,
+            task: name,
+          };
+          await Jobapi.postJob(toPost);
+          await Fileapi.uploadTasks(data);
+
+          toast.success("Job has been posted");
+          setInputField({
+            postDescription: "",
+            deadlineDate: "",
+            postTitle: "",
+            salary: "",
+          });
+          setContent("");
+          setDate("");
+        }
       } else {
         toast.error("Please fill the necessary fields");
       }
@@ -110,23 +129,47 @@ function PostJob() {
         <article>Post a Job</article>
       </div>
       <div className={css.container}>
-        <div className={css.titleDiv}>
-          <header>Job Title</header>
-          <input
-            type="text"
-            className={css.input}
-            placeholder="Enter the job of the title"
-            name="postTitle"
-            value={inputField.postTitle}
-            onChange={(e) => handleChange(e)}
-          />
-
-          <header>Deadline Date</header>
+        <div className={css.firstDiv}>
           <div>
+            <header>Job Title</header>
+            <input
+              type="text"
+              className={css.input}
+              placeholder="Enter the job of the title"
+              name="postTitle"
+              value={inputField.postTitle}
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
+
+          <div>
+            <header>Deadline Date</header>
             <DatePicker
               selected={date}
               onChange={(select) => setDate(select)}
               className={css.date}
+            />
+          </div>
+
+          <div>
+            <header>Salary</header>
+            <input
+              type="text"
+              className={css.input}
+              placeholder="Enter the Salary"
+              name="salary"
+              value={inputField.salary}
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
+
+          <div>
+            <header>Tasks</header>
+            <input
+              type="file"
+              className={css.input}
+              ref={taskRef}
+              onChange={(e) => changeCv(e)}
             />
           </div>
         </div>
@@ -140,19 +183,6 @@ function PostJob() {
             onChange={(value) => setContent(value.toString())}
             modules={modules}
             formats={formats}
-          />
-        </div>
-
-        <div className={css.salaryDiv}>
-          <header>Salary</header>
-
-          <input
-            type="text"
-            className={css.input}
-            placeholder="Enter the Salary"
-            name="salary"
-            value={inputField.salary}
-            onChange={(e) => handleChange(e)}
           />
         </div>
 
@@ -178,12 +208,14 @@ function PostJob() {
             </div>
           ))}
         </div>
+        <div>
+          <button className={css.btn} onClick={() => postJob()}>
+            Post
+          </button>
+        </div>
       </div>
-      <button className={css.btn} onClick={() => postJob()}>
-        Post
-      </button>
     </div>
   );
-}
+});
 
 export default PostJob;
