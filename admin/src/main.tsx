@@ -9,24 +9,28 @@ import {
   ProjectPage,
   UserPage,
 } from "./pages/";
-import { UseLayoutContext } from "./context";
+import { LayoutContext } from "./context";
 import { ProjectDetails } from "./components";
+import { Provider } from "react-redux";
+import { store } from "./state-management/store";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <UseLayoutContext>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<DashboardPage />} />
-            <Route path="/user" element={<UserPage />} />
-            <Route path="/jobs" element={<ProjectPage />} />
-            <Route path="/jobs/:id" element={<ProjectDetails />} />
+    <Provider store={store}>
+      <LayoutContext>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<DashboardPage />} />
+              <Route path="/user" element={<UserPage />} />
+              <Route path="/jobs" element={<ProjectPage />} />
+              <Route path="/jobs/:id" element={<ProjectDetails />} />
 
-            <Route path="/payment" element={<PaymentPage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </UseLayoutContext>
+              <Route path="/payment" element={<PaymentPage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </LayoutContext>
+    </Provider>
   </React.StrictMode>
 );

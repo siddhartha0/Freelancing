@@ -2,9 +2,8 @@ import { Navbar, Sidebar } from "../../components";
 import { Outlet } from "react-router-dom";
 import classnames from "classnames";
 import { useLayoutContent } from "../../context";
-import React from "react";
 
-export const Layout = React.memo(() => {
+export const Layout = () => {
   const context = useLayoutContent();
 
   return (
@@ -21,7 +20,7 @@ export const Layout = React.memo(() => {
         className={classnames(
           "flex ml-52 flex-col min-h-screen p-4 w-full gap-5 ",
           {
-            "-ml-1": context?.sidebarStatus == false,
+            "ml-0": context?.sidebarStatus == false,
           }
         )}
       >
@@ -30,4 +29,4 @@ export const Layout = React.memo(() => {
       </section>
     </main>
   );
-});
+};

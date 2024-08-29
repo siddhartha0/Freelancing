@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 interface contextPropTypes {
   children: React.ReactNode;
@@ -13,7 +13,7 @@ interface layoutcontextPropTypes {
 
 const layoutContext = createContext<layoutcontextPropTypes | null>(null);
 
-export const UseLayoutContext = React.memo(({ children }: contextPropTypes) => {
+export const LayoutContext = ({ children }: contextPropTypes) => {
   const [sidebarStatus, setSidebarStatus] = useState(true);
   const [currentPath, setCurrentPath] = useState("Dashboard");
 
@@ -24,7 +24,7 @@ export const UseLayoutContext = React.memo(({ children }: contextPropTypes) => {
       {children}
     </layoutContext.Provider>
   );
-});
+};
 
 export const useLayoutContent = () => {
   const context = useContext(layoutContext);
