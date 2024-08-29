@@ -6,7 +6,7 @@ interface propTypes
     React.HTMLAttributes<HTMLParagraphElement>,
     HTMLParagraphElement
   > {
-  size?: "header" | "medium" | "small";
+  size?: "header" | "medium" | "small" | "tiny";
   children: React.ReactNode;
   usage?: "brand" | "primary" | "secondary";
   classNAME?: string;
@@ -25,7 +25,9 @@ export const Text = React.memo(
         className={classname(`${classNAME}`, {
           "text-[28px]": size == "header",
           "text-[18px]": size === "medium",
-          "text-[12px]": size === "small",
+          "text-[15px]": size === "small",
+          "text-[13px]": size === "tiny",
+
           "text-text-brand": usage == "brand",
           "text-text-primary": usage == "primary",
           "text-text-secondary": usage == "secondary",

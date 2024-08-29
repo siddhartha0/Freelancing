@@ -1,3 +1,5 @@
+import { User } from "../../components";
+
 export const UserPage = () => {
-  return <main>User</main>;
+  return <User />;
 };
