@@ -5,5 +5,6 @@ export const PaymentHeader = [
   "Date",
   "Type",
   "Status",
+  "payment",
   "Amount",
 ];

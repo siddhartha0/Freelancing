@@ -28,7 +28,7 @@ export const Payment = React.memo(() => {
         <LoaderSpinner />
       ) : (
         <section className="flex flex-col gap-4  bg-text-secondary p-4 rounded-lg">
-          <header className="grid grid-cols-7 place-items-center justify-between border-b border-b-black border-opacity-[.1]   p-2">
+          <header className="grid grid-cols-8 place-items-center justify-between border-b border-b-black border-opacity-[.1]   p-2">
             {PaymentHeader.map((header: string, index: number) => (
               <Text key={header + index} classNAME="capitalize">
                 {header}
@@ -41,7 +41,7 @@ export const Payment = React.memo(() => {
               {acceptedJobs?.map((header: dataTypes, index: number) => (
                 <div
                   key={header._id + index}
-                  className="grid grid-cols-7 place-items-center  p-2 border-b border-b-text-secondary "
+                  className="grid grid-cols-8 place-items-center  p-2 border-b border-b-text-secondary "
                 >
                   <Text size="tiny">{header.acceptedClientId.name}</Text>
                   <Text size="tiny">{header.ownerId.name}</Text>
@@ -50,6 +50,9 @@ export const Payment = React.memo(() => {
                   <Text size="tiny">Paypal</Text>
                   <Text size="tiny">
                     {header.completed ? "Finished" : "Ongoing"}
+                  </Text>
+                  <Text size="tiny">
+                    {header.completed ? "Paid" : "unpaid"}
                   </Text>
                   <Text size="tiny">{header.salary}</Text>
                 </div>
