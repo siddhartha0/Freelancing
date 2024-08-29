@@ -51,7 +51,7 @@ export const ProjectDetails = React.memo(() => {
           <div className="flex place-items-center gap-8">
             <div className="flex place-items-center gap-2">
               <Icon name={Briefcase} iconSize={16} textColor="blue" />
-              <Text size="tiny">Xinu</Text>
+              <Text size="tiny">{data?.details?.ownerId.name}</Text>
             </div>
 
             <div className="flex place-items-center gap-2">
@@ -61,12 +61,12 @@ export const ProjectDetails = React.memo(() => {
 
             <div className="flex place-items-center gap-2">
               <Icon name={Mail} iconSize={16} textColor="red" />
-              <Text size="tiny">xinu@gmail.com</Text>
+              <Text size="tiny">{data?.details?.ownerId?.email}</Text>
             </div>
 
             <div className="flex place-items-center gap-2">
               <Icon name={Phone} iconSize={16} textColor="green" />
-              <Text size="tiny">9811562655</Text>
+              <Text size="tiny">{data?.details?.ownerId.contact}</Text>
             </div>
           </div>
         </header>

@@ -1,4 +1,3 @@
-const { timeStamp } = require("console");
 const mongoose = require("mongoose");
 
 const table = new mongoose.Schema({
@@ -18,19 +17,25 @@ const table = new mongoose.Schema({
     type: String,
   },
   ownerId: {
-    type: String,
-    require: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "auth",
   },
 
   skills: [],
-  clientId: [],
+  clientId: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "auth",
+    },
+  ],
   completed: {
     type: Boolean,
     default: false,
   },
+
   acceptedClientId: {
-    type: String,
-    default: "",
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "auth",
   },
 
   projectDuration: {
@@ -52,6 +57,9 @@ const table = new mongoose.Schema({
   },
 
   deadlineDate: {
+    type: String,
+  },
+  paymentMethod: {
     type: String,
   },
   newToDos: [],

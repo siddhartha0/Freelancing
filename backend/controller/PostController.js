@@ -24,17 +24,29 @@ router.post("/postJob", async (client, server) => {
 
 router.get("/getallPost", async (client, server) => {
   try {
-    const getallPost = await postModel.find();
+    console.log("hitted");
+    const getallPost = await postModel
+      .find()
+      .populate("ownerId")
+      .populate("clientId")
+      .populate("acceptedClientId");
+
     server
       .status(200)
       .json({ msg: "Your Job has been posted", JobPost: getallPost });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 router.get("/getPostById/:id", async (client, server) => {
   try {
     const jobId = client.params.id;
-    const fetchDetails = await postModel.findById(jobId);
+    const fetchDetails = await postModel
+      .findById(jobId)
+      .populate("ownerId")
+      .populate("clientId")
+      .populate("acceptedClientId");
 
     server.status(200).json({ msg: "JobDetails", details: fetchDetails });
   } catch (error) {}

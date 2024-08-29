@@ -28,8 +28,7 @@ export const Project = () => {
         <LoaderSpinner />
       ) : (
         <section className="grid grid-cols-3 gap-8">
-          {data &&
-            data?.JobPost.length > 0 &&
+          {data && data?.JobPost.length > 0 ? (
             data.JobPost.map((job: jobTypes) => (
               <div
                 className="flex flex-col gap-5 p-5 bg-white rounded-xl"
@@ -86,7 +85,10 @@ export const Project = () => {
                   </section>
                 </div>
               </div>
-            ))}
+            ))
+          ) : (
+            <Text>No data was found</Text>
+          )}
         </section>
       )}
     </main>
