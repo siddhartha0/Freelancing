@@ -1,6 +1,6 @@
 import { Button, Icon, Text } from "@/units";
 import React from "react";
-import { Briefcase, MapPin } from "react-feather";
+import { Briefcase, Mail, MapPin, Phone } from "react-feather";
 
 export const ProjectDetails = React.memo(() => {
   return (
@@ -9,19 +9,28 @@ export const ProjectDetails = React.memo(() => {
         <Text>Overview</Text>
         <div className="flex place-items-center justify-between">
           <Text size="small">Job Title : </Text>
-          <Text size="small">React</Text>
+          <Text size="small" usage="primary">
+            React
+          </Text>
         </div>
-        <div className="flex place-items-center justify-between">
-          <Text size="small">Posted Date : </Text>
-          <Text size="small">2024/1/11</Text>
-        </div>
+
         <div className="flex place-items-center justify-between">
           <Text size="small">Experience : </Text>
-          <Text size="small">Fresher</Text>
+          <Text size="small" usage="primary">
+            Fresher
+          </Text>
         </div>
         <div className="flex place-items-center justify-between">
           <Text size="small">Salary : </Text>
-          <Text size="small">1500</Text>
+          <Text size="small" usage="primary">
+            1500
+          </Text>
+        </div>
+        <div className="flex place-items-center justify-between">
+          <Text size="small">Posted Date : </Text>
+          <Text size="small" usage="primary">
+            2024/1/11
+          </Text>
         </div>
       </section>
 
@@ -30,13 +39,23 @@ export const ProjectDetails = React.memo(() => {
           <Text>React Developer</Text>
           <div className="flex place-items-center gap-8">
             <div className="flex place-items-center gap-2">
-              <Icon name={Briefcase} iconSize={16} />
+              <Icon name={Briefcase} iconSize={16} textColor="blue" />
               <Text size="tiny">Xinu</Text>
             </div>
 
             <div className="flex place-items-center gap-2">
-              <Icon name={MapPin} iconSize={16} />
+              <Icon name={MapPin} iconSize={16} textColor="orange" />
               <Text size="tiny">Remote</Text>
+            </div>
+
+            <div className="flex place-items-center gap-2">
+              <Icon name={Mail} iconSize={16} textColor="red" />
+              <Text size="tiny">xinu@gmail.com</Text>
+            </div>
+
+            <div className="flex place-items-center gap-2">
+              <Icon name={Phone} iconSize={16} textColor="green" />
+              <Text size="tiny">9811562655</Text>
             </div>
           </div>
         </header>

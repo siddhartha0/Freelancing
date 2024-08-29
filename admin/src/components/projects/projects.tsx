@@ -35,12 +35,19 @@ export const Project = () => {
             This is the description part of the projects. where it is only for
             testing
           </Text>
-          <div className="flex place-items-center justify-between">
+          <div className="grid grid-cols-2 gap-2 justify-between">
             <section className="flex place-items-center gap-2">
               <div className="bg-primary rounded-full">
                 <Icon name={X} iconSize={15} textColor="red" />
               </div>
               <Text size="tiny">Payment Verified</Text>
+            </section>
+
+            <section className="flex place-items-center gap-2">
+              <div className="bg-primary rounded-full">
+                <Icon name={X} iconSize={15} textColor="red" />
+              </div>
+              <Text size="tiny">Project Assigned</Text>
             </section>
             <section className="flex gap-2 place-items-center">
               <div className="bg-primary rounded-full">
