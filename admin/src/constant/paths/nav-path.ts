@@ -1,4 +1,4 @@
-import { DollarSign, Package, Server, User } from "react-feather";
+import { Briefcase, DollarSign, Package, User } from "react-feather";
 
 export const NavPaths = [
   {
@@ -15,9 +15,9 @@ export const NavPaths = [
   },
   {
     id: 3,
-    title: "Projects",
-    icon: Server,
-    path: "/projects",
+    title: "Jobs",
+    icon: Briefcase,
+    path: "/jobs",
   },
   {
     id: 4,

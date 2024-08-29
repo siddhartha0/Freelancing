@@ -1,7 +1,8 @@
 import { TableHeader, userData } from "@/constant";
 import { Button, Pagination, Text } from "@/units";
+import React from "react";
 
-export const User = () => {
+export const User = React.memo(() => {
   return (
     <main>
       <section className="flex flex-col gap-4  bg-text-secondary p-4">
@@ -16,9 +17,7 @@ export const User = () => {
         <div className="grid grid-cols-5 place-items-center  p-2 border-b border-b-text-secondary  ">
           {userData.map((header: string, index: number) => (
             <div key={header + index}>
-              <Text size="small" classNAME="capitalize">
-                {header}
-              </Text>
+              <Text size="small">{header}</Text>
             </div>
           ))}
 
@@ -35,4 +34,4 @@ export const User = () => {
       </section>
     </main>
   );
-};
+});

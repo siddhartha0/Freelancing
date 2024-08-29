@@ -10,6 +10,7 @@ import {
   UserPage,
 } from "./pages/";
 import { UseLayoutContext } from "./context";
+import { ProjectDetails } from "./components";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -19,7 +20,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route path="/" element={<Layout />}>
             <Route index element={<DashboardPage />} />
             <Route path="/user" element={<UserPage />} />
-            <Route path="/projects" element={<ProjectPage />} />
+            <Route path="/jobs" element={<ProjectPage />} />
+            <Route path="/jobs/:id" element={<ProjectDetails />} />
+
             <Route path="/payment" element={<PaymentPage />} />
           </Route>
         </Routes>

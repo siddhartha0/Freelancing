@@ -29,7 +29,7 @@ export const Sidebar = React.memo(() => {
             />
             <Text
               usage={context?.currentPath === nav.title ? "brand" : "secondary"}
-              size="medium"
+              size={context?.currentPath === nav.title ? "medium" : "small"}
             >
               {nav.title}
             </Text>
