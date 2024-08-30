@@ -3,7 +3,6 @@ import css from "./applicants.module.css";
 import { IoMdCloseCircle } from "react-icons/io";
 import pics from "../../../assets/noUser.png";
 import applicationapi from "../../api/applicationapi";
-import Userapi from "../../api/Userapi";
 import { useNavigate } from "react-router";
 import { Viewer, Worker } from "@react-pdf-viewer/core";
 import Jobapi from "../../api/Jobapi";
@@ -23,15 +22,20 @@ export default function ApplicantsPage({
   useEffect(() => {
     const fetchJobs = async () => {
       const jobs = await applicationapi.getapplication();
-      const oneJob = jobs.data.body.filter((job) => job.jobId === jobId);
-      setJobDetails(oneJob);
+
+      const oneJob = jobs?.data?.body.filter((job) => job?.jobId === jobId);
+
+      jobs.data.body.filter((data) => console.log(data.jobId.includes(jobId)));
       console.log(oneJob);
 
-      const currentJob = job?.jobs?.filter(
-        (project) => project._id === oneJob[0].jobId
-      );
-      const taskSubmitter = currentJob[0].taskCompletion;
-      setTaskCompletedUsers(taskSubmitter);
+      setJobDetails(oneJob);
+      if (oneJob.length > 0) {
+        const currentJob = job?.jobs?.filter(
+          (project) => project?._id === oneJob[0].jobId
+        );
+        const taskSubmitter = currentJob[0].taskCompletion;
+        setTaskCompletedUsers(taskSubmitter);
+      }
 
       // await Jobapi.searchingJob(oneJob.jobId)
     };
@@ -50,9 +54,9 @@ export default function ApplicantsPage({
         />
       </div>
       <div className={css.bodyDiv}>
-        {jobDetails.length > 0 &&
+        {jobDetails?.length > 0 &&
           jobDetails
-            .filter((jobs, i) => jobs.userId === taskCompletedUsers[i]?.userID)
+            ?.filter((jobs, i) => jobs.userId === taskCompletedUsers[i]?.userID)
             .map((jobs) => (
               <div className={css.parentDiv}>
                 <article>Task Finished Candidate</article>
@@ -88,9 +92,9 @@ export default function ApplicantsPage({
               </div>
             ))}
 
-        {jobDetails.length > 0 ? (
+        {jobDetails?.length > 0 ? (
           jobDetails
-            .filter((jobs, i) => jobs.userId !== taskCompletedUsers[i]?.userID)
+            ?.filter((jobs, i) => jobs.userId !== taskCompletedUsers[i]?.userID)
             .map((jobs, i) => (
               <div className={css.parentDiv} id={i}>
                 <article>Task Remaining candidate</article>
@@ -103,12 +107,12 @@ export default function ApplicantsPage({
                       nav(`/clientProfile/${jobs.userId}`);
                     }}
                   >
-                    {jobs.userName}
+                    {jobs?.userName}
                   </article>
                   <div className={css.cvDiv}>
                     <div className={css.pdfView}>
                       <a href={`/viewPdf/${jobs.name}`} target="blank">
-                        {jobs.name}
+                        {jobs?.name}
                       </a>
                     </div>
                   </div>
