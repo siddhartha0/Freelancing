@@ -13,37 +13,39 @@ function JobDetails() {
   const nav = useNavigate();
   const jobId = useParams();
 
-  const [postDetails, setPostDetails] = useState({});
   const [skills, setSkills] = useState([]);
   const [userDetails, setUserDetails] = useState({});
   const [cv, setCv] = useState();
   const document = useRef();
   const [userId, setuserId] = useState("");
   const [alreadyapplied, setalreadyapplied] = useState(false);
-  const [ownerDetails, setOwnerDetails] = useState();
   const [displayDescription, setDisplayDescription] = useState();
-  const [task, setTask] = useState();
+  const [post, setPost] = useState(null);
 
   useEffect(() => {
     const fetchJobDetails = async () => {
       const result = await Jobapi.searchingJob(jobId.id);
-      const taskGivenByCompany = result.data.details.task;
-      setTask(taskGivenByCompany);
+
+      setPost(result.data.details);
+
+      console.log(result.data.details);
       const parsedValue = parse(result.data.details.postDescription);
       setDisplayDescription(parsedValue);
-      setPostDetails(result.data.details);
       const getSkill = result.data.details.skills.map((e) => e.skills);
       setSkills(getSkill);
       const Id = JSON.parse(localStorage.getItem("userId"));
       setuserId(Id);
+
+      if (result.data.details) {
+        const clientResult = result.data.details.clientId.filter(
+          (client) => client._id === Id
+        );
+        if (clientResult.length > 0) {
+          setalreadyapplied(true);
+        }
+      }
       const user = await Userapi.getById(Id);
       setUserDetails(user);
-      // console.log(result.data.details);
-      const ownerId = await Userapi.getById(result.data.details.ownerId);
-      setOwnerDetails(ownerId.data.user);
-      result.data.details.clientId.map((id) =>
-        id === Id ? setalreadyapplied(true) : setalreadyapplied(false)
-      );
     };
     fetchJobDetails();
   }, []);
@@ -65,7 +67,7 @@ function JobDetails() {
         const sendingDocs = {
           userId: userId,
           name: name,
-          jobId: postDetails._id.toString(),
+          jobId: post?._id.toString(),
           userName: userDetails.data.user.name,
         };
         try {
@@ -76,8 +78,8 @@ function JobDetails() {
           console.log(error);
         }
         const updateJob = {
-          ...postDetails,
-          clientId: [...postDetails.clientId, userId],
+          ...post,
+          clientId: [...post.clientId, userId],
         };
         await Jobapi.updateJobDetails(updateJob);
         toast.success("Your application has been sent");
@@ -112,16 +114,16 @@ function JobDetails() {
       </div>
       <div className={css.topDiv}>
         <div className={css.leftDiv}>
-          <header>{postDetails.postTitle}</header>
+          <header>{post?.postTitle}</header>
 
           <div className={css.basicInfo}>
             <div className={css.dateDiv}>
               <article>Posted By</article>
-              <article>{ownerDetails?.name}</article>
+              <article>{post?.ownerId?.name}</article>
             </div>
             <div className={css.dateDiv}>
               <article>Deadline Date</article>
-              <article>{postDetails.deadlineDate}</article>
+              <article>{post?.deadlineDate}</article>
             </div>
           </div>
         </div>
@@ -130,9 +132,9 @@ function JobDetails() {
           <header>Salary</header>
           <div className={css.duoDiv}>
             <MdOutlineAttachMoney className={css.icon} />
-            <p>{postDetails.salary}</p>
+            <p>{post?.salary}</p>
           </div>
-          <p>{postDetails.salaryStatus}</p>
+          <p>{post?.salaryStatus}</p>
         </div>
       </div>
 

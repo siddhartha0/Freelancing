@@ -15,6 +15,7 @@ import { getUser } from "../../slices/UserSlice";
 
 function Profile() {
   const user = useSelector(getUser);
+  console.log(user);
   const [UserSkills, setUserSkills] = useState([]);
   const [userProject, setuserProject] = useState([]);
 
@@ -25,8 +26,6 @@ function Profile() {
     };
     fetchData();
   }, [user]);
-
-  console.log(user);
 
   const nav = useNavigate();
   const [editProps, setEditProps] = useState(false);

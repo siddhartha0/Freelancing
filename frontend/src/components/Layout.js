@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import css from "./Layout.module.css";
 import Header from "./header/Header";
 import Body from "./body/Body";
@@ -9,7 +9,6 @@ import { Toaster } from "react-hot-toast";
 
 export default function Layout() {
   const [authShow, setauthShow] = useState(false);
-  console.log(authShow);
 
   return (
     <div className={css.layout}>

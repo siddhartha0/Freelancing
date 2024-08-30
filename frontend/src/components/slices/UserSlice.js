@@ -22,7 +22,7 @@ const UserSlice = createSlice({
   },
 });
 
-export const getUser = (state) => state.User.userDetails;
+export const getUser = (state) => state?.User.userDetails;
 
 export const { setCredentials, removeCredentials } = UserSlice.actions;
 
