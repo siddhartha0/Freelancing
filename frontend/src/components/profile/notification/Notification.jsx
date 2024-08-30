@@ -65,12 +65,18 @@ function Notification() {
       const finished = jobs.data.JobPost.filter(
         (job) => job?.acceptedClientId?._id === userId && job.completed === true
       );
+
       setFinishedProjects(finished);
       setAssignedJob(yourPendingJobs);
 
-      const yourJob = jobs.data.JobPost.map((job) =>
-        job.clientId.includes(userId)
+      const yourJob = jobs?.data?.JobPost?.map((job) =>
+        job?.clientId.includes(userId)
       );
+
+      const what = jobs.data.JobPost.map((job) =>
+        job.clientId.map((client) => client._id.includes(userId))
+      );
+      console.log(what);
 
       const you = jobs.data.JobPost.filter((job, i) => yourJob[i] === true);
       console.log(you);

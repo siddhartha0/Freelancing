@@ -6,7 +6,6 @@ import { FaPhone, FaLocationArrow } from "react-icons/fa6";
 import profile from "../../../assets/noUser.jpg";
 import ToDo from "./ToDo";
 import { useNavigate, useParams } from "react-router";
-import Userapi from "../../api/Userapi";
 import Jobapi from "../../api/Jobapi";
 import { DragDropContext } from "react-beautiful-dnd";
 import { calaulateProjectDuration } from "../../payments/utils/Helper";
@@ -15,24 +14,15 @@ function AcceptedClientPage() {
   const [projectRemainingTime, setProjectRemainingTime] = useState("");
   const nav = useNavigate();
   const { id } = useParams();
-  const [clientDetails, setClientDetails] = useState({});
   const [selectedJobDetails, setSelectedJobDetails] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
       const job = await Jobapi.searchingJob(id);
       setSelectedJobDetails(job.data.details);
-      const clientId = job.data.details.acceptedClientId;
-      const getClient = await Userapi.getById(clientId);
-      if (getClient.data) {
-        setClientDetails(getClient.data.user);
-      }
-
       setProjectRemainingTime(
         calaulateProjectDuration(job.data.details.deadlineDate)
       );
-
-      // console.log(remainingTime);
     };
     fetchData();
   }, [id]);
@@ -47,7 +37,7 @@ function AcceptedClientPage() {
 
         <div className={css.bodyDiv}>
           <div className={css.bodyTopDiv}>
-            <container className={css.profileContainer}>
+            <section className={css.profileContainer}>
               <div className={css.imgDiv}>
                 <img src={profile} alt="profile" className={css.profilePics} />
               </div>
@@ -55,31 +45,43 @@ function AcceptedClientPage() {
               <div className={css.informationDiv}>
                 <div className={css.topRightDiv}></div>
                 <header className={css.headDiv}>
-                  <article>{clientDetails.jobTitle}</article>
+                  <article>
+                    {selectedJobDetails?.acceptedClientId?.jobTitle}
+                  </article>
                 </header>
                 <container className={css.duoDiv}>
                   <FaUser className={css.logo} />
-                  <article>{clientDetails.name}</article>
+                  <article>
+                    {selectedJobDetails?.acceptedClientId?.name}
+                  </article>
                 </container>
                 <container className={css.duoDiv}>
                   <FaLocationArrow className={css.logo} />
-                  <article>{clientDetails.address}</article>
+                  <article>
+                    {selectedJobDetails?.acceptedClientId?.address}
+                  </article>
                 </container>
                 <container className={css.duoDiv}>
                   <IoMailOutline className={css.logo} />
-                  <article>{clientDetails.email}</article>
+                  <article>
+                    {selectedJobDetails?.acceptedClientId?.email}
+                  </article>
                 </container>
                 <container className={css.duoDiv}>
                   <FaPhone className={css.logo} />
-                  <article>{clientDetails.contact}</article>
+                  <article>
+                    {selectedJobDetails?.acceptedClientId?.contact}
+                  </article>
                 </container>
               </div>
-            </container>
+            </section>
 
             <container className={css.profileContainer}>
               <div className={css.informationDiv}>
                 <header className={css.headDiv}>
-                  <article>{clientDetails.jobTitle}</article>
+                  <article>
+                    {selectedJobDetails?.acceptedClientId?.jobTitle}
+                  </article>
                 </header>
                 <container className={css.duoDiv}>
                   <article>Project Duration</article>
