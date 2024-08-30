@@ -51,15 +51,19 @@ function Notification() {
       setuserID(userId);
       const jobs = await Jobapi.fetchJobs();
 
+      console.log(jobs.data.JobPost);
+
       const yourPostedJobs = jobs.data.JobPost.filter(
-        (job) => job.ownerId === userId
+        (job) => job?.ownerId?._id === userId
       );
+
       const yourPendingJobs = jobs.data.JobPost.filter(
-        (job) => job.acceptedClientId === userId && job.completed === false
+        (job) =>
+          job?.acceptedClientId?._id === userId && job.completed === false
       );
 
       const finished = jobs.data.JobPost.filter(
-        (job) => job.acceptedClientId === userId && job.completed === true
+        (job) => job?.acceptedClientId?._id === userId && job.completed === true
       );
       setFinishedProjects(finished);
       setAssignedJob(yourPendingJobs);
