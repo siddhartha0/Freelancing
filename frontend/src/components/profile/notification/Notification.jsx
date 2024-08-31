@@ -71,7 +71,9 @@ function Notification() {
         client.clientId.map((client) => client._id === userId)
       );
 
-      const you = jobs.data.JobPost.filter((job, i) => yourJob[i] === true);
+      const you = jobs.data.JobPost.filter((job, i) =>
+        job.clientId.filter((client) => yourJob[i] === true)
+      );
 
       console.log(you);
       setyourappliedJobs(you);
