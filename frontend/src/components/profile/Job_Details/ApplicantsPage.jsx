@@ -25,9 +25,6 @@ export default function ApplicantsPage({
 
       const oneJob = jobs?.data?.body.filter((job) => job?.jobId === jobId);
 
-      jobs.data.body.filter((data) => console.log(data.jobId.includes(jobId)));
-      console.log(oneJob);
-
       setJobDetails(oneJob);
       if (oneJob.length > 0) {
         const currentJob = job?.jobs?.filter(

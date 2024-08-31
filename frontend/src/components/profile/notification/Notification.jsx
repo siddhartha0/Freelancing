@@ -75,7 +75,6 @@ function Notification() {
         job.clientId.filter((client) => yourJob[i] === true)
       );
 
-      console.log(you);
       setyourappliedJobs(you);
 
       setYourPostedJobs(yourPostedJobs);
