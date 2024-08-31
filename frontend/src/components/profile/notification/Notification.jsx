@@ -51,8 +51,6 @@ function Notification() {
       setuserID(userId);
       const jobs = await Jobapi.fetchJobs();
 
-      console.log(jobs.data.JobPost);
-
       const yourPostedJobs = jobs.data.JobPost.filter(
         (job) => job?.ownerId?._id === userId
       );
@@ -69,16 +67,12 @@ function Notification() {
       setFinishedProjects(finished);
       setAssignedJob(yourPendingJobs);
 
-      const yourJob = jobs?.data?.JobPost?.map((job) =>
-        job?.clientId.includes(userId)
+      const yourJob = jobs.data.JobPost.map((client) =>
+        client.clientId.map((client) => client._id === userId)
       );
-
-      const what = jobs.data.JobPost.map((job) =>
-        job.clientId.map((client) => client._id.includes(userId))
-      );
-      console.log(what);
 
       const you = jobs.data.JobPost.filter((job, i) => yourJob[i] === true);
+
       console.log(you);
       setyourappliedJobs(you);
 
