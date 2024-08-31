@@ -4,17 +4,11 @@ import { IoMdCloseCircle } from "react-icons/io";
 import pics from "../../../assets/noUser.png";
 import applicationapi from "../../api/applicationapi";
 import { useNavigate } from "react-router";
-import { Viewer, Worker } from "@react-pdf-viewer/core";
-import Jobapi from "../../api/Jobapi";
-import { Toaster, toast } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { getJobsPost } from "../../slices/PostSlice";
 
-export default function ApplicantsPage({
-  setShowapplicants,
-  jobId,
-  selectedJobDetails,
-}) {
+export default function ApplicantsPage({ setShowapplicants, jobId }) {
   const [jobDetails, setJobDetails] = useState([]);
   const job = useSelector(getJobsPost);
   const [taskCompletedUsers, setTaskCompletedUsers] = useState([]);
