@@ -4,7 +4,9 @@ import React from "react";
 function Khalti(total) {
   const khalti = async () => {
     console.log(total);
-    const response = await axios.get("http://localhost:3333/khalti", total);
+    const response = await axios.get(
+      `http://localhost:3333/khalti/${total.total}`
+    );
     const resJson = await response.data;
     window.location.href = resJson.url;
   };

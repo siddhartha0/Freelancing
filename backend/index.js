@@ -46,13 +46,13 @@ paypal.configure({
   client_secret: process.env.PAYPAL_CLIENT_SECRET,
 });
 
-app.get("/khalti", async (req, res) => {
-  console.log(req.body);
+app.get("/khalti/:id", async (req, res) => {
+  console.log(req.params.id);
   try {
     const data = JSON.stringify({
       return_url: "http://localhost:3000/success",
       website_url: "http://localhost:5173/",
-      amount: 1000,
+      amount: req.params.id,
       purchase_order_id: "test12",
       purchase_order_name: "test",
       customer_info: {
@@ -63,12 +63,8 @@ app.get("/khalti", async (req, res) => {
       amount_breakdown: [
         {
           label: "Mark Price",
-          amount: 1000,
+          amount: req.params.id,
         },
-        // {
-        //   label: "VAT",
-        //   amount: 300,
-        // },
       ],
     });
     var request = {
@@ -146,8 +142,6 @@ app.get("/paypal/:id", async (req, res) => {
 });
 
 app.get("/esewa/:id", async (req, res) => {
-  let data;
-  console.log(req.params.id);
   const fromData = {
     amount: req.params.id,
     failure_url: "http://localhost:8000/failed",
@@ -163,17 +157,13 @@ app.get("/esewa/:id", async (req, res) => {
   };
 
   var request = {
-    method: "GET",
-    // body: fromData,
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
+    body: JSON.stringify(fromData),
   };
-  const response = await fetch(
-    // "rc-epay.esewa.com.np/api/epay/main/v2/form",
-    "https://rc-epay.esewa.com.np/auth",
-    request
-  );
+  const response = await fetch("https://rc-epay.esewa.com.np/auth", request);
   const result = await response.text();
   const resultObject = JSON.parse(result);
   console.log(result);
