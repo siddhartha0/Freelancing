@@ -53,7 +53,7 @@ app.get("/khalti/:id", async (req, res) => {
     const data = JSON.stringify({
       return_url: "http://localhost:3000/success",
       website_url: "http://localhost:5173/",
-      amount: req.params.id,
+      amount: req.params.id * 10,
       purchase_order_id: "test12",
       purchase_order_name: "test",
       customer_info: {
@@ -64,7 +64,7 @@ app.get("/khalti/:id", async (req, res) => {
       amount_breakdown: [
         {
           label: "Mark Price",
-          amount: Number(req.params.id).toFixed(),
+          amount: req.params.id * 10,
         },
       ],
     });

@@ -1,28 +1,35 @@
 import axios from "axios";
 import React from "react";
+import Jobapi from "../../api/Jobapi";
 
-function Khalti(
-  total,
+function Khalti({
+  clientId,
+  totalSalary,
   projectDetails,
   userDetails,
   getSalaryFre,
   salaryToBeProvided,
-  salaryPerMonth,
   salaryPerWeek,
-  projectDuration
-) {
+  salaryPerMonth,
+  projectDuration,
+}) {
+  console.log(totalSalary);
+
   const khalti = async () => {
-    console.log(total);
+    console.log(totalSalary);
     const response = await axios.get(
-      `http://localhost:3333/khalti/${total.total}`
+      `http://localhost:3333/khalti/${totalSalary}`
     );
+
+    const resJson = await response.data;
+    window.location.href = resJson.url;
 
     const acceptClient = {
       ...projectDetails,
       acceptedClientId: userDetails,
       projectTaken: true,
       salaryStatus: getSalaryFre,
-      salary: total.total,
+      salary: totalSalary,
       clientRecievedSalary: salaryToBeProvided,
       moneySentPerSalaryStatus:
         getSalaryFre === "weekly"
@@ -33,8 +40,8 @@ function Khalti(
       projectDuration: projectDuration,
     };
 
-    const resJson = await response.data;
-    window.location.href = resJson.url;
+    console.log(acceptClient);
+    await Jobapi.updateJobDetails(acceptClient);
   };
   return (
     <>

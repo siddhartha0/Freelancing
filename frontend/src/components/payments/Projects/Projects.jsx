@@ -11,8 +11,6 @@ import {
 } from "../utils/Helper";
 import { useMemo } from "react";
 import Pay from "./Pay";
-import toast from "react-hot-toast";
-import Sewa from "./Sewa";
 import Khalti from "./Khalti";
 
 function Projects() {
@@ -20,11 +18,11 @@ function Projects() {
   const [clientID, setClientID] = useState("");
 
   const { id } = useParams();
-  const [userDetails, setUserDetails] = useState();
+  const [userDetails, setUserDetails] = useState(null);
   const todayDate = new Date();
-  const [projectDetails, setProjectDetails] = useState();
+  const [projectDetails, setProjectDetails] = useState(null);
 
-  const [totalSalary, setTotalSalary] = useState();
+  const [totalSalary, setTotalSalary] = useState(0);
 
   const [projectDuration, setProjectDuration] = useState();
 
@@ -40,30 +38,51 @@ function Projects() {
     return calculateWeekly(salaryToBeProvided, projectDuration);
   }, [salaryToBeProvided, projectDuration]);
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const getapplication = await applicationapi.getMyapplication(id);
+
+  //     const clientId = await Jobapi.getClientId();
+
+  //     setUserDetails(getapplication.data.userId);
+
+  //     setClientID(clientId.data.id);
+  //     const project = await Jobapi.searchingJob(getapplication.data.jobId);
+
+  //     salary = project.data.salary;
+  //     setProjectDetails(project.data.details);
+  //     setTotalSalary(project.data.details.salary);
+
+  //     const duration = calaulateProjectDuration(
+  //       project.data.details.deadlineDate
+  //     );
+
+  //     setProjectDuration(duration);
+  //   };
+
+  //   fetchData();
+  // }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       const getapplication = await applicationapi.getMyapplication(id);
-
       const clientId = await Jobapi.getClientId();
 
       setUserDetails(getapplication.data.userId);
-
       setClientID(clientId.data.id);
-      const project = await Jobapi.searchingJob(getapplication.data.jobId);
 
+      const project = await Jobapi.searchingJob(getapplication.data.jobId);
       setProjectDetails(project.data.details);
-      console.log(project.data.details.salary);
       setTotalSalary(project.data.details.salary);
 
       const duration = calaulateProjectDuration(
         project.data.details.deadlineDate
       );
-
       setProjectDuration(duration);
     };
 
     fetchData();
-  }, [id]);
+  }, []);
 
   return (
     <div className={css.wholeDiv}>
@@ -179,20 +198,9 @@ function Projects() {
           projectDuration={projectDuration}
         />
 
-        <Sewa
-          total={totalSalary}
-          clientId={clientID}
-          projectDetails={projectDetails}
-          userDetails={userDetails}
-          getSalaryFre={getSalaryFre}
-          salaryToBeProvided={salaryToBeProvided}
-          salaryPerMonth={salaryPerMonth}
-          salaryPerWeek={salaryPerWeek}
-          projectDuration={projectDuration}
-        />
         <Khalti
-          total={totalSalary}
           clientId={clientID}
+          totalSalary={totalSalary}
           projectDetails={projectDetails}
           userDetails={userDetails}
           getSalaryFre={getSalaryFre}
