@@ -52,17 +52,18 @@ function Projects() {
       const project = await Jobapi.searchingJob(getapplication.data.jobId);
 
       setProjectDetails(project.data.details);
+      console.log(project.data.details.salary);
+      setTotalSalary(project.data.details.salary);
 
       const duration = calaulateProjectDuration(
         project.data.details.deadlineDate
       );
 
       setProjectDuration(duration);
-      setTotalSalary(project.data.details.salary);
     };
 
     fetchData();
-  }, []);
+  }, [id]);
 
   return (
     <div className={css.wholeDiv}>
@@ -179,7 +180,17 @@ function Projects() {
         />
 
         <Sewa total={totalSalary} />
-        <Khalti total={totalSalary} />
+        <Khalti
+          clientId={clientID}
+          totalSalary={totalSalary}
+          projectDetails={projectDetails}
+          userDetails={userDetails}
+          getSalaryFre={getSalaryFre}
+          salaryToBeProvided={salaryToBeProvided}
+          salaryPerMonth={salaryPerMonth}
+          salaryPerWeek={salaryPerWeek}
+          projectDuration={projectDuration}
+        />
       </div>
     </div>
   );

@@ -1,12 +1,41 @@
 import axios from "axios";
 import React from "react";
 
-function Khalti(total) {
+function Khalti(
+  clientId,
+  totalSalary,
+  projectDetails,
+  userDetails,
+  getSalaryFre,
+  salaryToBeProvided,
+  salaryPerMonth,
+  salaryPerWeek,
+  projectDuration
+) {
   const khalti = async () => {
-    console.log(total);
+    console.log(totalSalary);
     const response = await axios.get(
-      `http://localhost:3333/khalti/${total.total}`
+      `http://localhost:3333/khalti/${totalSalary}`
     );
+
+    const acceptClient = {
+      ...projectDetails,
+      acceptedClientId: userDetails,
+      projectTaken: true,
+      salaryStatus: getSalaryFre,
+      salary: totalSalary,
+      clientRecievedSalary: salaryToBeProvided,
+      moneySentPerSalaryStatus:
+        getSalaryFre === "weekly"
+          ? salaryPerWeek
+          : getSalaryFre === "monthly"
+          ? salaryPerMonth
+          : salaryToBeProvided,
+      projectDuration: projectDuration,
+    };
+
+    console.log(acceptClient);
+
     const resJson = await response.data;
     window.location.href = resJson.url;
   };
