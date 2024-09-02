@@ -63,7 +63,7 @@ app.get("/khalti/:id", async (req, res) => {
       amount_breakdown: [
         {
           label: "Mark Price",
-          amount: req.params.id,
+          amount: Number(req.params.id).toFixed(),
         },
       ],
     });
@@ -142,33 +142,40 @@ app.get("/paypal/:id", async (req, res) => {
 });
 
 app.get("/esewa/:id", async (req, res) => {
-  const fromData = {
-    amount: req.params.id,
-    failure_url: "http://localhost:8000/failed",
-    product_delivery_charge: "0",
-    product_service_charge: "0",
-    product_code: "EPAYTEST",
-    signature: "YVweM7CgAtZW5tRKica/BIeYFvpSj09AaInsulqNKHk=",
-    signed_field_names: "total_amount,transaction_uuid,product_code",
-    success_url: "http://localhost:3000/success",
-    tax_amount: "0",
-    total_amount: req.params.id,
-    transaction_uuid: "ab14a8f2b02c3",
-  };
+  try {
+    const fromData = {
+      amount: req.params.id,
+      failure_url: "http://localhost:8000/failed",
+      product_delivery_charge: "0",
+      product_service_charge: "0",
+      product_code: "EPAYTEST",
+      signature: "YVweM7CgAtZW5tRKica/BIeYFvpSj09AaInsulqNKHk=",
+      signed_field_names: "total_amount,transaction_uuid,product_code",
+      success_url: "http://localhost:3000/success",
+      tax_amount: "0",
+      total_amount: req.params.id,
+      transaction_uuid: "ab14a8f2b02c3",
+    };
 
-  var request = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(fromData),
-  };
-  const response = await fetch("https://rc-epay.esewa.com.np/auth", request);
-  const result = await response.text();
-  const resultObject = JSON.parse(result);
-  console.log(result);
-  if (result) {
-    res.send({ url: resultObject.payment_url });
+    var request = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const response = await fetch("https://rc-epay.esewa.com.np/auth", fromData);
+
+    console.log("response", response);
+
+    const result = await response.text();
+    const resultObject = JSON.parse(result);
+    console.log(result);
+    if (result) {
+      res.send({ url: resultObject.payment_url });
+    }
+  } catch (error) {
+    console.log(error);
   }
 });
 

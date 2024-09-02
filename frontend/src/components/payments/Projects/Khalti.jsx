@@ -2,8 +2,7 @@ import axios from "axios";
 import React from "react";
 
 function Khalti(
-  clientId,
-  totalSalary,
+  total,
   projectDetails,
   userDetails,
   getSalaryFre,
@@ -13,9 +12,9 @@ function Khalti(
   projectDuration
 ) {
   const khalti = async () => {
-    console.log(totalSalary);
+    console.log(total);
     const response = await axios.get(
-      `http://localhost:3333/khalti/${totalSalary}`
+      `http://localhost:3333/khalti/${total.total}`
     );
 
     const acceptClient = {
@@ -23,7 +22,7 @@ function Khalti(
       acceptedClientId: userDetails,
       projectTaken: true,
       salaryStatus: getSalaryFre,
-      salary: totalSalary,
+      salary: total.total,
       clientRecievedSalary: salaryToBeProvided,
       moneySentPerSalaryStatus:
         getSalaryFre === "weekly"

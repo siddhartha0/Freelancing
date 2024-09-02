@@ -181,8 +181,8 @@ function Projects() {
 
         <Sewa total={totalSalary} />
         <Khalti
+          total={totalSalary}
           clientId={clientID}
-          totalSalary={totalSalary}
           projectDetails={projectDetails}
           userDetails={userDetails}
           getSalaryFre={getSalaryFre}
