@@ -166,11 +166,9 @@ app.get("/esewa/:id", async (req, res) => {
 
     const response = await fetch("https://rc-epay.esewa.com.np/auth", fromData);
 
-    console.log("response", response);
-
     const result = await response.text();
     const resultObject = JSON.parse(result);
-    console.log(result);
+    console.log(resultObject);
     if (result) {
       res.send({ url: resultObject.payment_url });
     }
