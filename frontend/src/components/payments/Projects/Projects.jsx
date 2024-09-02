@@ -179,7 +179,17 @@ function Projects() {
           projectDuration={projectDuration}
         />
 
-        <Sewa total={totalSalary} />
+        <Sewa
+          total={totalSalary}
+          clientId={clientID}
+          projectDetails={projectDetails}
+          userDetails={userDetails}
+          getSalaryFre={getSalaryFre}
+          salaryToBeProvided={salaryToBeProvided}
+          salaryPerMonth={salaryPerMonth}
+          salaryPerWeek={salaryPerWeek}
+          projectDuration={projectDuration}
+        />
         <Khalti
           total={totalSalary}
           clientId={clientID}

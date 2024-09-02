@@ -33,8 +33,6 @@ function Khalti(
       projectDuration: projectDuration,
     };
 
-    console.log(acceptClient);
-
     const resJson = await response.data;
     window.location.href = resJson.url;
   };
