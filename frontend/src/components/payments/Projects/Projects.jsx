@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import applicationapi from "../../api/applicationapi";
 import Jobapi from "../../api/Jobapi";
 import {
-  calaulateProjectDuration,
   calculateMonthly,
   calculateWeekly,
   moneyToBeProviedToClients,
@@ -38,31 +37,6 @@ function Projects() {
     return calculateWeekly(salaryToBeProvided, projectDuration);
   }, [salaryToBeProvided, projectDuration]);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const getapplication = await applicationapi.getMyapplication(id);
-
-  //     const clientId = await Jobapi.getClientId();
-
-  //     setUserDetails(getapplication.data.userId);
-
-  //     setClientID(clientId.data.id);
-  //     const project = await Jobapi.searchingJob(getapplication.data.jobId);
-
-  //     salary = project.data.salary;
-  //     setProjectDetails(project.data.details);
-  //     setTotalSalary(project.data.details.salary);
-
-  //     const duration = calaulateProjectDuration(
-  //       project.data.details.deadlineDate
-  //     );
-
-  //     setProjectDuration(duration);
-  //   };
-
-  //   fetchData();
-  // }, []);
-
   useEffect(() => {
     const fetchData = async () => {
       const getapplication = await applicationapi.getMyapplication(id);
@@ -75,10 +49,7 @@ function Projects() {
       setProjectDetails(project.data.details);
       setTotalSalary(project.data.details.salary);
 
-      const duration = calaulateProjectDuration(
-        project.data.details.deadlineDate
-      );
-      setProjectDuration(duration);
+      setProjectDuration(project?.data.details.projectDuration);
     };
 
     fetchData();

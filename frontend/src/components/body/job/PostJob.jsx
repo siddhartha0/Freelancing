@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useRef, useState } from "react";
+import React, { memo, useRef, useState } from "react";
 import css from "./PostJob.module.css";
 import { PiPlusCircle } from "react-icons/pi";
 import { IoChevronBack } from "react-icons/io5";
@@ -14,13 +14,13 @@ import Fileapi from "../../api/Fileapi";
 
 const PostJob = memo(() => {
   const nav = useNavigate();
-  const [date, setDate] = useState(new Date());
 
   const [inputField, setInputField] = useState({
     postTitle: "",
     salary: "",
     ownerId: "",
     salaryStatus: "",
+    projectDuration: "",
     newToDos: [],
     finishedToDos: [],
   });
@@ -43,6 +43,14 @@ const PostJob = memo(() => {
     skillList[i][name] = value;
     setSkill(skillList);
   };
+
+  const durationValue = [
+    "less than month",
+    "1 month",
+    "2 months",
+    "3 months",
+    "4 months",
+  ];
 
   const modules = {
     toolbar: [
@@ -74,6 +82,8 @@ const PostJob = memo(() => {
     "code-block",
   ];
   const [taskDetails, setTaskDetails] = useState();
+  const [durationAlert, setDurationAlert] = useState(false);
+
   const taskRef = useRef();
 
   const changeCv = (e) => {
@@ -95,7 +105,6 @@ const PostJob = memo(() => {
           const toPost = {
             ...inputField,
             postDescription: getContent.toString(),
-            deadlineDate: date.toISOString().slice(0, 10),
             ownerId: ownerId,
             skills: skills,
             task: name,
@@ -111,7 +120,6 @@ const PostJob = memo(() => {
             salary: "",
           });
           setContent("");
-          setDate("");
         }
       } else {
         toast.error("Please fill the necessary fields");
@@ -143,12 +151,46 @@ const PostJob = memo(() => {
           </div>
 
           <div>
-            <header>Deadline Date</header>
-            <DatePicker
-              selected={date}
-              onChange={(select) => setDate(select)}
-              className={css.date}
+            <header>Project Duration</header>
+            <input
+              className={css.input}
+              value={inputField.projectDuration}
+              name="projectDuration"
+              onChange={handleChange}
+              onClick={() => setDurationAlert((prev) => !prev)}
             />
+
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              {durationAlert &&
+                durationValue.map((time) => (
+                  <div
+                    key={time}
+                    style={{
+                      cursor: "pointer",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "10px",
+                    }}
+                    onClick={() => {
+                      setInputField({ ...inputField, projectDuration: time });
+                      setDurationAlert(false);
+                    }}
+                  >
+                    {inputField.projectDuration
+                      ? time
+                          .toLocaleLowerCase()
+                          .includes(
+                            inputField.projectDuration.toLocaleLowerCase()
+                          )
+                      : time}
+                  </div>
+                ))}
+            </div>
           </div>
 
           <div>

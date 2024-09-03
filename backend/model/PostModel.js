@@ -22,6 +22,7 @@ const table = new mongoose.Schema({
   },
 
   skills: [],
+  payments: [],
   clientId: [
     {
       type: mongoose.Schema.Types.ObjectId,
