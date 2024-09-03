@@ -2,6 +2,7 @@ import { PaymentHeader } from "@/constant";
 import { useGetAllProjectQuery } from "@/state-management";
 import { LoaderSpinner, Text } from "@/units";
 import React, { useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface dataTypes {
   _id: string;
@@ -11,6 +12,7 @@ interface dataTypes {
   acceptedClientId: { name: string };
   completed: boolean;
   salary: number;
+  projectTaken: boolean;
 }
 
 export const Payment = React.memo(() => {
@@ -18,9 +20,11 @@ export const Payment = React.memo(() => {
 
   const acceptedJobs = useMemo(() => {
     if (data) {
-      return data.JobPost.filter((job: dataTypes) => job.acceptedClientId);
+      return data.JobPost.filter((job: dataTypes) => job?.projectTaken);
     }
   }, [data]);
+
+  const nav = useNavigate();
 
   return (
     <main>
@@ -41,7 +45,8 @@ export const Payment = React.memo(() => {
               {acceptedJobs?.map((header: dataTypes, index: number) => (
                 <div
                   key={header._id + index}
-                  className="grid grid-cols-8 place-items-center  p-2 border-b border-b-text-secondary "
+                  className="grid grid-cols-8 place-items-center  p-2 border-b border-b-text-secondary cursor-pointer hover:bg-primary"
+                  onClick={() => nav(`/jobs/${header._id}`)}
                 >
                   <Text size="tiny">{header.acceptedClientId.name}</Text>
                   <Text size="tiny">{header.ownerId.name}</Text>
