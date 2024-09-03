@@ -20,7 +20,7 @@ export const Layout = () => {
         className={classnames(
           "flex ml-52 flex-col min-h-screen p-4 w-full gap-5 ",
           {
-            "ml-2": context?.sidebarStatus == false,
+            "ml-0": context?.sidebarStatus == false,
           }
         )}
       >
