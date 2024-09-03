@@ -40,12 +40,18 @@ export const Invoice = () => {
           <div className="flex gap-4">
             <Text size="small">To Pay : </Text>
             <Text size="small">
-              Rs. {data?.details.moneySentPerSalaryStatus}
+              Rs.{" "}
+              {data?.details.moneySentPerSalaryStatus ?? data?.details.salary}
             </Text>
           </div>
           <div className="flex gap-4">
             <Text size="small">Project Duration : </Text>
             <Text size="small">{data?.details.projectDuration}</Text>
+          </div>
+
+          <div className="flex gap-4">
+            <Text size="small">Total Salary : </Text>
+            <Text size="small">{data?.details.salary}</Text>
           </div>
         </section>
       </header>
