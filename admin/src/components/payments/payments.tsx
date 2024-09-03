@@ -46,7 +46,7 @@ export const Payment = React.memo(() => {
                 <div
                   key={header._id + index}
                   className="grid grid-cols-8 place-items-center  p-2 border-b border-b-text-secondary cursor-pointer hover:bg-primary"
-                  onClick={() => nav(`/jobs/${header._id}`)}
+                  onClick={() => nav(`/invoice/${header._id}`)}
                 >
                   <Text size="tiny">{header.acceptedClientId.name}</Text>
                   <Text size="tiny">{header.ownerId.name}</Text>

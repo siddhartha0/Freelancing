@@ -13,6 +13,7 @@ import { LayoutContext } from "./context";
 import { ProjectDetails } from "./components";
 import { Provider } from "react-redux";
 import { store } from "./state-management/store";
+import { Invoice } from "./components/payments/invoice";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -27,6 +28,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
               <Route path="/jobs/:id" element={<ProjectDetails />} />
 
               <Route path="/payment" element={<PaymentPage />} />
+              <Route path="/invoice/:id" element={<Invoice />} />
             </Route>
           </Routes>
         </BrowserRouter>
