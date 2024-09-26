@@ -40,9 +40,6 @@ router.post(
     try {
       const name = client.name;
       console.log(name);
-
-      // const toSave = new model();
-
       return server.status(200).send("Success");
     } catch (error) {
       console.log(error);
@@ -55,9 +52,7 @@ router.post(
   taskUpload.single("file", (client, server) => {
     try {
       const name = client.name;
-      console.log(name);
-
-      // const toSave = new model();
+      console.log("task", name);
 
       return server.status(200).send("Success");
     } catch (error) {

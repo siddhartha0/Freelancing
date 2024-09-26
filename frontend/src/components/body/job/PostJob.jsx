@@ -105,7 +105,7 @@ const PostJob = memo(() => {
           const toPost = {
             ...inputField,
             postDescription: getContent.toString(),
-            ownerId: ownerId,
+            ownerId: ownerId.toString(),
             skills: skills,
             task: name,
           };

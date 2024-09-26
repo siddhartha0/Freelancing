@@ -8,10 +8,8 @@ import ToDo from "./ToDo";
 import { useNavigate, useParams } from "react-router";
 import Jobapi from "../../api/Jobapi";
 import { DragDropContext } from "react-beautiful-dnd";
-import { calaulateProjectDuration } from "../../payments/utils/Helper";
 
 function AcceptedClientPage() {
-  const [projectRemainingTime, setProjectRemainingTime] = useState("");
   const nav = useNavigate();
   const { id } = useParams();
   const [selectedJobDetails, setSelectedJobDetails] = useState({});
@@ -20,9 +18,6 @@ function AcceptedClientPage() {
     const fetchData = async () => {
       const job = await Jobapi.searchingJob(id);
       setSelectedJobDetails(job.data.details);
-      setProjectRemainingTime(
-        calaulateProjectDuration(job.data.details.deadlineDate)
-      );
     };
     fetchData();
   }, [id]);
@@ -94,10 +89,6 @@ function AcceptedClientPage() {
                 <container className={css.duoDiv}>
                   <article>Salary Frequency</article>
                   <article>{selectedJobDetails?.salaryStatus}</article>
-                </container>
-                <container className={css.duoDiv}>
-                  <article>Remaining Time</article>
-                  <article>{projectRemainingTime}</article>
                 </container>
               </div>
             </container>
