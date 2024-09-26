@@ -11,6 +11,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import Fileapi from "../../api/Fileapi";
+import axios from "axios";
 
 const PostJob = memo(() => {
   const nav = useNavigate();
@@ -110,7 +111,19 @@ const PostJob = memo(() => {
             task: name,
           };
           await Jobapi.postJob(toPost);
-          await Fileapi.uploadTasks(data);
+
+          axios
+            .post("http://localhost:3333/upload/task", data, {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            })
+            .then((response) => {
+              console.log("File upload success:", response.data);
+            })
+            .catch((error) => {
+              console.error("Error uploading file:", error);
+            });
 
           toast.success("Job has been posted");
           setInputField({

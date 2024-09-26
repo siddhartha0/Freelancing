@@ -12,18 +12,19 @@ const storage = multer.diskStorage({
   },
 });
 
-const taskStorage = multer.diskStorage({
+const testStorage = multer.diskStorage({
   destination: (client, file, cb) => {
-    cb(null, "./public/task");
+    cb(null, "./public/completedTask");
   },
   filename: (client, file, cb) => {
     cb(null, client.body.name);
   },
 });
 
-const testStorage = multer.diskStorage({
+const taskStorage = multer.diskStorage({
   destination: (client, file, cb) => {
-    cb(null, "./public/completedTask");
+    console.log("hitted");
+    cb(null, "./public/task");
   },
   filename: (client, file, cb) => {
     cb(null, client.body.name);
@@ -35,11 +36,14 @@ const taskUpload = multer({ storage: taskStorage });
 const testUpload = multer({ storage: testStorage });
 
 router.post(
-  "/document/",
-  upload.single("file", (client, server) => {
+  "/task/",
+  taskUpload.single("file", (client, server) => {
     try {
+      console.log("hiteed");
+
       const name = client.name;
-      console.log(name);
+      console.log("task", name);
+
       return server.status(200).send("Success");
     } catch (error) {
       console.log(error);
@@ -48,12 +52,11 @@ router.post(
 );
 
 router.post(
-  "/task/",
-  taskUpload.single("file", (client, server) => {
+  "/document/",
+  upload.single("file", (client, server) => {
     try {
       const name = client.name;
-      console.log("task", name);
-
+      console.log(name);
       return server.status(200).send("Success");
     } catch (error) {
       console.log(error);
