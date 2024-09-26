@@ -6,141 +6,98 @@
     <title>Esewa payment integration testing</title>
   </head>
   <body>
-    <!-- Payment form -->
-    <div class="payment">
-      <div class="esewa">
-        <!-- Include CryptoJS library -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/hmac-sha256.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/enc-base64.min.js"></script>
-        <!-- Payment form -->
-        <form
-          action="https://rc-epay.esewa.com.np/api/epay/main/v2/form"
-          method="POST"
-          onsubmit="generateSignature()"
-          target="_blank"
-        >
-          <!-- Hidden form fields -->
-          <input type="hidden" id="amount" name="amount" value="100" />
-          <input type="hidden" id="tax_amount" name="tax_amount" value="0" />
-          <input
-            type="hidden"
-            id="total_amount"
-            name="total_amount"
-            value="100"
-          />
-          <input
-            type="hidden"
-            id="transaction_uuid"
-            name="transaction_uuid"
-            value="11-200-111sss1"
-          />
-          <input
-            type="hidden"
-            id="product_code"
-            name="product_code"
-            value="EPAYTEST"
-          />
-          <input
-            type="hidden"
-            id="product_service_charge"
-            name="product_service_charge"
-            value="0"
-          />
-          <input
-            type="hidden"
-            id="product_delivery_charge"
-            name="product_delivery_charge"
-            value="0"
-          />
-          <!-- URLs for success and failure -->
-          <input
-            type="hidden"
-            id="success_url"
-            name="success_url"
-            value="http://localhost:3000/success"
-          />
-          <input
-            type="hidden"
-            id="failure_url"
-            name="failure_url"
-            value="http://127.0.0.1:5500/fail.html"
-          />
-          <!-- Fields to be signed -->
-          <input
-            type="hidden"
-            id="signed_field_names"
-            name="signed_field_names"
-            value="total_amount,transaction_uuid,product_code"
-          />
-          <!-- Signature -->
-          <input
-            type="hidden"
-            id="signature"
-            name="signature"
-            value="4Ov7pCI1zIOdwtV2BRMUNjz1upIlT/COTxfLhWvVurE="
-          />
-          <!-- Secret key -->
-          <input
-            type="hidden"
-            id="secret"
-            name="secret"
-            value="8gBm/:&EnhH.1/q"
-          />
-          <!-- Submit button -->
-          <input
-            value="Pay with eSewa"
-            type="submit"
-            class="button"
-            style="
-              background-color: #60bb46;
-              color: #fff;
-              border: none;
-              padding: 5px 10px;
-            "
-          />
-        </form>
-        <!-- JavaScript to generate signature -->
-        <script>
-          // Function to auto-generate signature
-          function generateSignature() {
-            var currentTime = new Date();
-            var formattedTime =
-              currentTime.toISOString().slice(2, 10).replace(/-/g, "") +
-              "-" +
-              currentTime.getHours() +
-              currentTime.getMinutes() +
-              currentTime.getSeconds();
-            document.getElementById("transaction_uuid").value = formattedTime;
-            var total_amount = document.getElementById("total_amount").value;
-            var transaction_uuid =
-              document.getElementById("transaction_uuid").value;
-            var product_code = document.getElementById("product_code").value;
-            var secret = document.getElementById("secret").value;
-
-            var hash = CryptoJS.HmacSHA256(
-              `total_amount=${total_amount},transaction_uuid=${transaction_uuid},product_code=${product_code}`,
-              `${secret}`
-            );
-            var hashInBase64 = CryptoJS.enc.Base64.stringify(hash);
-            document.getElementById("signature").value = hashInBase64;
-          }
-
-          // Event listeners to call generateSignature() when inputs are changed
-          document
-            .getElementById("total_amount")
-            .addEventListener("input", generateSignature);
-          document
-            .getElementById("transaction_uuid")
-            .addEventListener("input", generateSignature);
-          document
-            .getElementById("product_code")
-            .addEventListener("input", generateSignature);
-          document
-            .getElementById("secret")
-            .addEventListener("input", generateSignature);
-        </script>
-      </div>
+    <div class="container">
+      <h2>Phone Number Authentication</h2>
+      <div id="error"></div>
+      <div id="recaptcha-container"></div>
+      <input type="tel" id="phone-number" placeholder="Enter phone number" />
+      <button id="send-code">Send Verification Code</button>
+      <input
+        type="text"
+        id="verification-code"
+        placeholder="Enter verification code"
+      />
+      <button id="verify-code">Verify Code</button>
+      <div id="user-details"></div>
     </div>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script>
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyAyWbY3csVAqhiYu5eQnhfaPAta_BzRztI",
+        authDomain: "chalau-5c46e.firebaseapp.com",
+        projectId: "chalau-5c46e",
+        storageBucket: "chalau-5c46e.appspot.com",
+        messagingSenderId: "543950509836",
+        appId: "1:543950509836:web:5dd4146d918ab406dc9b29",
+        measurementId: "G-SPV1GCHKZ9",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      // Get elements
+      const phoneNumberInput = document.getElementById("phone-number");
+      const sendCodeButton = document.getElementById("send-code");
+      const verificationCodeInput =
+        document.getElementById("verification-code");
+      const verifyCodeButton = document.getElementById("verify-code");
+      const userDetails = document.getElementById("user-details");
+      const errorElement = document.getElementById("error");
+      // Set up reCAPTCHA verifier
+      window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
+        "recaptcha-container",
+        {
+          size: "normal",
+          callback: (response) => {
+            // reCAPTCHA solved, allow signInWithPhoneNumber.
+            sendCodeButton.disabled = false;
+          },
+          "expired-callback": () => {
+            // Response expired. Ask user to solve reCAPTCHA again.
+            sendCodeButton.disabled = true;
+          },
+        }
+      );
+      recaptchaVerifier.render().then((widgetId) => {
+        window.recaptchaWidgetId = widgetId;
+      });
+      // Send verification code
+      sendCodeButton.addEventListener("click", () => {
+        const phoneNumber = phoneNumberInput.value;
+        firebase
+          .auth()
+          .signInWithPhoneNumber(phoneNumber, window.recaptchaVerifier)
+          .then((confirmationResult) => {
+            window.confirmationResult = confirmationResult;
+            errorElement.textContent = "Verification code sent!";
+          })
+          .catch((error) => {
+            errorElement.textContent = `Error: ${error.message}`;
+            grecaptcha.reset(window.recaptchaWidgetId);
+          });
+      });
+      // Verify code
+      verifyCodeButton.addEventListener("click", () => {
+        const code = verificationCodeInput.value;
+        confirmationResult
+          .confirm(code)
+          .then((result) => {
+            const user = result.user;
+            firebase
+              .auth()
+              .currentUser.getIdToken(/* forceRefresh */ true)
+              .then(function (idToken) {
+                userDetails.textContent = ` ${idToken}`;
+                errorElement.textContent = `Token: ${idToken}`;
+              })
+              .catch(function (error) {
+                // Handle error
+              });
+          })
+          .catch((error) => {
+            errorElement.textContent = `Error: ${error.message}`;
+          });
+      });
+    </script>
   </body>
 </html>
