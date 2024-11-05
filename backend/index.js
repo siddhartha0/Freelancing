@@ -47,7 +47,7 @@ paypal.configure({
   client_secret: process.env.PAYPAL_CLIENT_SECRET,
 });
 
-
+//khalti
 app.get("/khalti/:id", async (req, res) => {
   console.log(req.params.id);
   try {
