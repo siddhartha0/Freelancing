@@ -91,6 +91,7 @@ app.get("/khalti/:id", async (req, res) => {
   }
 });
 
+//paypal
 app.get("/paypal/:id", async (req, res) => {
   let data;
   console.log(req.params.id);
